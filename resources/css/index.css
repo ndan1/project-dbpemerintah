@@ -1,0 +1,31 @@
+body {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    /* background-color: firebrick; */
+    color: red;
+}
+
+.nav-item {
+    margin: 30px;
+}
+
+.navbar {
+    background-color: rgb(222, 10, 10);
+}
+
+.input-group {
+    width: 80%;
+    margin:auto;
+}
+
+.register-button-position{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    border-width: 10px;
+}

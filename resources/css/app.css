@@ -1,0 +1,70 @@
+body {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    color: red;
+}
+
+.nav-item {
+    margin: 30px;
+}
+
+.navbar {
+    background-color: rgb(222, 10, 10);
+}
+
+.input-group {
+    max-width: 80%;
+    margin:auto;
+}
+
+.register-button-position{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    width: 90vw;
+    height:90vh;
+    margin: 5vh auto;
+    position:relative;
+    padding-right: 2vw;
+}
+
+.side-form{
+    background-color: white;
+    z-index: 0;
+    /* border: 2px solid black; */
+}
+
+/* .main-card img {
+    object-fit: fill;
+} */
+
+.form-position {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (max-width:475px){
+
+    .side-image{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:900px){
+
+    .card {
+        width: 90vw;
+        height:90vh;
+        margin: 5vh auto;
+        position:relative;
+        padding-right: 1.5vh;
+    }
+
+}
