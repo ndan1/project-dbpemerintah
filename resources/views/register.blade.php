@@ -23,7 +23,7 @@
                         style="max-width:90vw;max-height:88.65vh;z-index:-1;background-size: cover; border-radius: 1px;">
                 </div>
                 <div class="col-7 side-form form-position">
-                    {{-- @if ($errors->any())
+                    @if ($errors->any())
                         <div class="col-12">
                             @foreach ($errors->all() as $error)
                                 <div class="alert alert-danger">{{ $error }}</div>
@@ -33,7 +33,10 @@
                     @endif
                     @if (session()->has('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
-                    @endif --}}
+                    @endif
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
                     <h2 class="mb-4" style="margin: 0 auto">REGISTER</h2>
                     <form action="{{ route('registering') }}" method="POST" id="form1">
                         @csrf

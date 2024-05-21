@@ -13,13 +13,14 @@
                     @if (session()->has('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-    <form action="{{route('buat-sim')}}" method="POST" enctype="multipart/form-data">
+    <div class="form-container">
+    <form action="{{route('buat-sim')}}" method="POST" enctype="multipart/form-data" class="">
         @csrf
-        <div class="mb-3 mt-3">
+        <div class="mb-3 mt-3 text-center">
             <h1>Pembuatan SIM</h1>
         </div>
         <div class="mb-3 row">
-            <label for="namalengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
+            <label for="namalengkap" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
               <input type="text" id="namalengkap" name="customer_name" value="{{$profile->customer_name ?? ''}}" disabled>
             </div>
@@ -46,4 +47,5 @@
           </div>
           <button type="submit" class="btn btn-primary" style="height: 6vh;">Simpan</button>
     </form>
+    </div>
     @endsection

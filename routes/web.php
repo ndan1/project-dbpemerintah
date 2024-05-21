@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PembuatanSim;
+use App\Http\Controllers\PerpanjangSim;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -37,5 +38,7 @@ Route::post('/logging-in',[LoginRegisterController::class, 'actionlogin'])->name
 Route::get('/pembuatan-sim',[PembuatanSim::class, 'show'])->name('pembuatan-sim');
 Route::post('/pembuatan-sim',[PembuatanSim::class, 'store'])->name('buat-sim');
 
-Route::get('/perpanjang-sim',[PembuatanSim::class, 'show'])->name('perpanjang-sim');
-Route::post('/perpanjang-sim',[PembuatanSim::class, 'store'])->name('panjang-sim');
+Route::get('/perpanjang-sim',[PerpanjangSim::class, 'show'])->name('perpanjang-sim');
+Route::post('/perpanjang-sim',[PerpanjangSim::class, 'store'])->name('panjang-sim');
+
+Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');

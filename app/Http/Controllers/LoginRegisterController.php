@@ -3,11 +3,12 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Session;
+// use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class LoginRegisterController extends Controller {
     public function store(Request $request) {
@@ -51,5 +52,11 @@ class LoginRegisterController extends Controller {
         // Jika autentikasi gagal, berarti password salah
         return redirect(route('login'))->with("error", "Wrong password!");
 
+    }
+
+    function logout(){
+        Session::flush();
+        Auth::Logout();
+        return redirect(route('home'));
     }
 }

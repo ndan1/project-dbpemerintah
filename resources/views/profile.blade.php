@@ -13,9 +13,12 @@
 @if (session()->has('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
+<div class="">
     <form action="{{route('profile.update', ['customer_email' => Auth::user()->customer_email])}}" method="POST">
         @csrf
-
+        <div>
+            <h1>Edit Profile</h1>
+        </div>
         <div class="mb-3 row">
             <label for="namalengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
             <div class="col-sm-10">
@@ -38,11 +41,12 @@
           </div>
           <div class="mb-3">
             <label for="inputPassword" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-            <input type="radio" id="gender" value="L" name="gender" {{$profile->gender == 'L' ? checked : ''}}>
+            <input type="radio" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
             <label for="gender">Laki-Laki</label>
-            <input type="radio" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{$profile->gender == 'L' ? checked : ''}}>
+            <input type="radio" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
             <label for="gender">Perempuan</label>
           </div>
           <button type="submit" class="btn btn-primary" style="height: 6vh;">Simpan</button>
     </form>
+</div>
 @endsection
