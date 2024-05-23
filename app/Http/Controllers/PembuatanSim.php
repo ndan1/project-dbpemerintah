@@ -22,12 +22,12 @@ class PembuatanSim extends Controller
         $fileName1 = time().$request->file('foto_ktp')->getClientOriginalName();
         $fileName2 = time().$request->file('pas_foto')->getClientOriginalName();
         $fileName3 = time().$request->file('surat_sehat')->getClientOriginalName();
-        $path = $request->file('foto_ktp')->storeAs('images/pembuatansim/foto_ktp', $fileName1, 'public');
-        $path = $request->file('pas_foto')->storeAs('images/pembuatansim/pas_foto', $fileName2, 'public');
-        $path = $request->file('surat_sehat')->storeAs('images/pembuatansim/surat_sehat', $fileName3, 'public');
-        $requestData["foto_ktp"] ='/storage/'.$path;
-        $requestData["pas_foto"] ='/storage/'.$path;
-        $requestData["surat_sehat"] ='/storage/'.$path;
+        $path1 = $request->file('foto_ktp')->storeAs('images/pembuatansim/foto_ktp', $fileName1, 'public');
+        $path2 = $request->file('pas_foto')->storeAs('images/pembuatansim/pas_foto', $fileName2, 'public');
+        $path3 = $request->file('surat_sehat')->storeAs('images/pembuatansim/surat_sehat', $fileName3, 'public');
+        $requestData["foto_ktp"] ='/storage/'.$path1;
+        $requestData["pas_foto"] ='/storage/'.$path2;
+        $requestData["surat_sehat"] ='/storage/'.$path3;
         BuatSim::create($requestData);
         return redirect('pembuatan-sim')->with('flash-message', 'Berhasil daftar');
     }

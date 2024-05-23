@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminListPembuatanSim;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PembuatanSim;
@@ -42,3 +43,31 @@ Route::get('/perpanjang-sim',[PerpanjangSim::class, 'show'])->name('perpanjang-s
 Route::post('/perpanjang-sim',[PerpanjangSim::class, 'store'])->name('panjang-sim');
 
 Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
+
+
+Route::get('/adminpanel', function () {
+    return view('admin/adminhome');
+})->name('adminhome');
+// Route::get('/adminpanel', function () {
+//     return view('admin/adminhome');
+// })->middleware('pegawai')->name('adminhome');
+
+Route::get('/adminregister', function () {
+    return view('admin/adminregister');
+})->name('adminregister');
+
+Route::post('/registeringadmin',[LoginRegisterController::class, 'storeadmin'])->name('registering.admin');
+
+Route::get('/adminlogin', function () {
+    return view('admin/adminlogin');
+})->name('adminlogin');
+
+Route::post('/loginadmin',[LoginRegisterController::class, 'loginadmin'])->name('login.admin');
+Route::get('/logoutadmin', [LoginRegisterController::class, 'logoutadmin'])->name('logoutadmin');
+
+Route::get('/adminpembuatan', function () {
+    return view('admin/adminpembuatansim');
+})->name('adminpembuatan');
+
+Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
+// Route::resource("/adminpembuatan", AdminListPembuatanSim::class);

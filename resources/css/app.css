@@ -3,7 +3,6 @@ html, body {
     height: 100%;
     background-size: cover;
     background-position: center;
-    color: red;
     margin: 0;
 }
 
@@ -84,12 +83,54 @@ html, body {
     background-color: red;
     color: blue;
 } */
-@media screen and (max-width:475px){
 
+
+
+/* ADMIN PANEL HOME*/
+.container-count-all{
+    display: flex;
+    justify-content: center;
+    width: 78vw;
+    height: 20vh;
+    margin: 0;
+}
+
+.container-count-antrian{
+    font-size: 2vw;
+    width: 15vw;
+    height: 10vw;
+    border: 2px solid black;
+    margin: 1em;
+    padding: 1vw;
+    border-radius: 1em;
+}
+
+.link-sidebar{
+    color: black;
+}
+
+.count-antrian-text{
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+/* PAGINATION */
+a.relative{
+    text-decoration: none;
+    color: black;
+}
+
+span.relative{
+  display: none;
+}
+
+/* LOGIN REGISTER ADMIN */
+
+
+@media screen and (max-width:475px){
     .side-image{
         display: none;
     }
-
 }
 
 @media screen and (max-width:900px){

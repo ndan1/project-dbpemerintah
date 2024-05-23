@@ -17,4 +17,9 @@ class BuatSim extends Model
         'pas_foto',
         'surat_sehat'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_customer');
+    }
 }

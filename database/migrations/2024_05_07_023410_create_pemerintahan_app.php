@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('pas_foto');
             $table->string('surat_sehat');
             $table->string('foto_sim');
+            $table->string('foto_sim');
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('id_customer')->references('id_customer')->on('customer');
