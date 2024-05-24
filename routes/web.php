@@ -71,3 +71,4 @@ Route::get('/adminpembuatan', function () {
 
 Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
 // Route::resource("/adminpembuatan", AdminListPembuatanSim::class);
+Route::get('/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'show'])->name('pembuatan-sim.show');

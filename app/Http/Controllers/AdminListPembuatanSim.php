@@ -15,6 +15,15 @@ class AdminListPembuatanSim extends Controller
         return view ('admin.adminpembuatansim')->with('pembuatansim', $list);
     }
 
+    public function show($id)
+    {
+        // Fetch the specific record by id and include the related user data
+        $pembuatanSim = BuatSim::with('user')->findOrFail($id);
+
+        // Return the view with the fetched data
+        return view('admin.admindetailpembuatan', compact('pembuatanSim'));
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
