@@ -35,7 +35,7 @@
         <!-- Email input -->
         <div data-mdb-input-init class="form-outline mb-4">
           <input type="email" id="form2Example2" class="form-control" name="email"/>
-          <label class="form-label" for="form2Example2">Email address</label>
+          <label class="form-label" for="form2Example2">Email Address</label>
         </div>
 
         <!-- Password input -->
