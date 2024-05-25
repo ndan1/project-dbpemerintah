@@ -92,7 +92,7 @@
             </a>
           </li>
           <li class="{{(Request::is('adminpembuatan'))?'nav-item':''}}">
-            <a href="{{url('adminpembuatan')}}" class="nav-link link-sidebar {{(Request::is('adminpembuatan'))?'active':''}}">
+            <a href="{{url('admin/pembuatan-sim')}}" class="nav-link link-sidebar {{(Request::is('adminpembuatan'))?'active':''}}">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Pembuatan SIM
             </a>

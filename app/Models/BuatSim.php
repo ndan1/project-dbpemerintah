@@ -15,7 +15,10 @@ class BuatSim extends Model
         'id_customer',
         'foto_ktp',
         'pas_foto',
-        'surat_sehat'
+        'surat_sehat',
+        'tipe_sim', // Add this
+        'status',   // Add this
+        'comments'
     ];
 
     public function user()

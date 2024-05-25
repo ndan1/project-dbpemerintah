@@ -24,6 +24,42 @@ class AdminListPembuatanSim extends Controller
         return view('admin.admindetailpembuatan', compact('pembuatanSim'));
     }
 
+    public function adminIndex()
+    {
+        $pembuatansim = BuatSim::where('status', 'pending')->paginate(7);
+        return view('admin.adminpembuatansim', compact('pembuatansim'));
+    }
+
+    public function adminShow($id)
+    {
+        $pembuatanSim = BuatSim::find($id);
+        return view('admin.admindetailpembuatan', compact('pembuatanSim'));
+    }
+
+    public function approve($id)
+    {
+        $pembuatanSim = BuatSim::find($id);
+        $pembuatanSim->status = 'approved';
+        $pembuatanSim->comments = NULL;
+        $pembuatanSim->save();
+
+        return redirect()->route('adminpembuatan')->with('success', 'SIM approved successfully.');
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $request->validate([
+            'comments' => 'required|string',
+        ]);
+
+        $pembuatanSim = BuatSim::find($id);
+        $pembuatanSim->status = 'rejected';
+        $pembuatanSim->comments = $request->input('comments');
+        $pembuatanSim->save();
+
+        return redirect()->route('adminpembuatan')->with('success', 'SIM rejected with comments.');
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

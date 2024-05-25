@@ -56,6 +56,10 @@ Route::get('/adminregister', function () {
     return view('admin/adminregister');
 })->name('adminregister');
 
+Route::get('/quiz', function () {
+    return view('quiz');
+})->name('quiz');
+
 Route::post('/registeringadmin',[LoginRegisterController::class, 'storeadmin'])->name('registering.admin');
 
 Route::get('/adminlogin', function () {
@@ -65,10 +69,14 @@ Route::get('/adminlogin', function () {
 Route::post('/loginadmin',[LoginRegisterController::class, 'loginadmin'])->name('login.admin');
 Route::get('/logoutadmin', [LoginRegisterController::class, 'logoutadmin'])->name('logoutadmin');
 
-Route::get('/adminpembuatan', function () {
-    return view('admin/adminpembuatansim');
-})->name('adminpembuatan');
+// Route::get('/adminpembuatan', function () {
+//     return view('admin/adminpembuatansim');
+// })->name('adminpembuatan');
 
-Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
 // Route::resource("/adminpembuatan", AdminListPembuatanSim::class);
-Route::get('/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'show'])->name('pembuatan-sim.show');
+// Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
+// Route::get('/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'show'])->name('pembuatan-sim.show');
+    Route::get('/admin/pembuatan-sim', [AdminListPembuatanSim::class, 'adminIndex'])->name('adminpembuatan');
+    Route::get('/admin/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'adminShow'])->name('admin.pembuatan-sim.show');
+    Route::post('/admin/pembuatan-sim/{id}/approve', [AdminListPembuatanSim::class, 'approve'])->name('admin.pembuatan-sim.approve');
+    Route::post('/admin/pembuatan-sim/{id}/reject', [AdminListPembuatanSim::class, 'reject'])->name('admin.pembuatan-sim.reject');
