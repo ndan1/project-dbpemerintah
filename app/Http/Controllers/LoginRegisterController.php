@@ -99,7 +99,7 @@ class LoginRegisterController extends Controller {
         return redirect(route('adminlogin'))->with("error", "Wrong password!");
     }
 
-    function logout(){
+    public function logout(){
         Session::flush();
         Auth::Logout();
         return redirect(route('home'));
@@ -110,4 +110,6 @@ class LoginRegisterController extends Controller {
         Auth::Logout();
         return redirect(route('adminlogin'));
     }
+
+
 }

@@ -9,6 +9,12 @@ body {
 
   main {
     display: flex;
+    height: 100vh;
+  }
+
+  .sidebar {
+    display: flex;
+    position: sticky;
     flex-wrap: nowrap;
     height: 100vh;
     height: -webkit-fill-available;

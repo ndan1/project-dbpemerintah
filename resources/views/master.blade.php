@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <div class="all-home" style="background-image: url('{{ asset('images/wallpaper.png') }}')">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary bgtrans px-5">
+    <div class="all-home">
+        <nav class="navbar navbar-expand-lg bgtrans px-5">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Pemerintah Kota Malang</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

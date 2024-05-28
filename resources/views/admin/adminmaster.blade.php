@@ -15,6 +15,15 @@
     <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
     <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
     <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="mdb/css/mdb.min.css" />
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
     <style>
         .bd-placeholder-img {
           font-size: 1.125rem;
@@ -36,48 +45,8 @@
       <link href="sidebars.css" rel="stylesheet">
     </head>
 <body>
-        {{-- <nav class="navbar bg-body-tertiary fixed-top">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="#">Offcanvas navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                        <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                </div>
-            </div>
-            </div>
-        </nav> --}}
       <main>
+        <div class="sidebar">
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
@@ -85,14 +54,14 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto" id="sidebar-menu">
-          <li class="{{(Request::is('adminpanel'))?'nav-item':''}}">
-            <a href="{{url('adminpanel')}}" class="nav-link link-sidebar {{(Request::is('adminpanel'))?'active':''}} " aria-current="page">
+          <li class="{{ (Request::is('adminpanel')) ? 'nav-item' : '' }}">
+            <a href="{{ url('adminpanel') }}" class="nav-link link-sidebar {{ (Request::is('adminpanel')) ? 'active' : '' }}" aria-current="page">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
               Dashboard
             </a>
           </li>
-          <li class="{{(Request::is('adminpembuatan'))?'nav-item':''}}">
-            <a href="{{url('admin/pembuatan-sim')}}" class="nav-link link-sidebar {{(Request::is('adminpembuatan'))?'active':''}}">
+          <li class="{{ (Request::is('admin/pembuatan-sim')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/pembuatan-sim') }}" class="nav-link link-sidebar {{ (Request::is('admin/pembuatan-sim')) ? 'active' : '' }}">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Pembuatan SIM
             </a>
@@ -101,6 +70,12 @@
             <a href="#" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
               Perpanjangan SIM
+            </a>
+          </li>
+          <li class="{{ (Request::is('admin/pertanyaan')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/pertanyaan') }}" class="nav-link link-sidebar {{ (Request::is('admin/pertanyaan')) ? 'active' : '' }}">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+              Ujian Teori
             </a>
           </li>
           <li>
@@ -118,19 +93,30 @@
         </ul>
         <hr>
         <div class="dropdown">
-          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>{{ Auth::guard('pegawai')->user()->name_pegawai }}</strong>
-          </a>
-          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{route('logoutadmin')}}">Sign out</a></li>
-          </ul>
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                @if (Auth::guard('pegawai')->check())
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>{{ Auth::guard('pegawai')->user()->name_pegawai }}</strong>
+                @else
+                    <script type="text/javascript">
+                        window.location = "{{ route('adminlogin') }}"; // Replace 'adminlogin' with your actual route name
+                    </script>
+                @endif
+            </a>
+
+            @if (Auth::guard('pegawai')->check())
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{ route('logoutadmin') }}">Sign out</a></li>
+                </ul>
+            @endif
         </div>
+
       </div>
+    </div>
       @yield('content')
     </main>
 </body>
@@ -138,24 +124,6 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const sidebarMenu = document.getElementById('sidebar-menu');
-    //     const menuItems = sidebarMenu.querySelectorAll('.nav-item');
-
-    //     menuItems.forEach(item => {
-    //         item.addEventListener('click', function() {
-    //             // Remove active class from all menu items
-    //             menuItems.forEach(i => {
-    //                 i.querySelector('a').classList.remove('active');
-    //                 i.querySelector('a').classList.add('link-dark');
-    //             });
-
-    //             // Add active class to the clicked item
-    //             this.querySelector('a').classList.add('active');
-    //             this.querySelector('a').classList.remove('link-dark');
-    //         });
-    //     });
-    // });
     document.addEventListener('DOMContentLoaded', function() {
         const sidebarMenu = document.getElementById('sidebar-menu');
         const menuLinks = sidebarMenu.querySelectorAll('.nav-link');
@@ -177,4 +145,9 @@
         });
     });
 </script>
+<script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
+<script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+></script>
 </html>

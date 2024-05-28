@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PembuatanSim;
 use App\Http\Controllers\PerpanjangSim;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,18 @@ Route::get('/logoutadmin', [LoginRegisterController::class, 'logoutadmin'])->nam
 // Route::resource("/adminpembuatan", AdminListPembuatanSim::class);
 // Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
 // Route::get('/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'show'])->name('pembuatan-sim.show');
-    Route::get('/admin/pembuatan-sim', [AdminListPembuatanSim::class, 'adminIndex'])->name('adminpembuatan');
-    Route::get('/admin/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'adminShow'])->name('admin.pembuatan-sim.show');
-    Route::post('/admin/pembuatan-sim/{id}/approve', [AdminListPembuatanSim::class, 'approve'])->name('admin.pembuatan-sim.approve');
-    Route::post('/admin/pembuatan-sim/{id}/reject', [AdminListPembuatanSim::class, 'reject'])->name('admin.pembuatan-sim.reject');
+
+Route::prefix('admin')->group(function () {
+    Route::get('tambah-quiz', function () {
+        return view('admin.createQuiz');
+    })->name('createQuiz');
+    Route::post('tambah-quiz', [QuizController::class, 'BuatQuiz'])->name('buat.quiz');
+    Route::get('pertanyaan', [QuizController::class, 'ShowQuiz'])->name('show.quiz');
+    Route::get('edit-pertanyaan/{id}', [QuizController::class, 'EditQuizForm'])->name('edit.quiz');
+    Route::post('edit-pertanyaan/{id}', [QuizController::class, 'EditQuiz'])->name('edit.quiz');
+    Route::get('hapus-pertanyaan/{id}', [QuizController::class, 'DeleteQuiz'])->name('delete.quiz');
+    Route::get('pembuatan-sim', [AdminListPembuatanSim::class, 'adminIndex'])->name('adminpembuatan');
+    Route::get('pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'adminShow'])->name('admin.pembuatan-sim.show');
+    Route::post('pembuatan-sim/{id}/approve', [AdminListPembuatanSim::class, 'approve'])->name('admin.pembuatan-sim.approve');
+    Route::post('pembuatan-sim/{id}/reject', [AdminListPembuatanSim::class, 'reject'])->name('admin.pembuatan-sim.reject');
+});
