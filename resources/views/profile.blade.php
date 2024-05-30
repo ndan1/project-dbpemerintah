@@ -14,15 +14,15 @@
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 <div class="">
-    <form action="{{route('profile.update', ['customer_email' => Auth::user()->customer_email])}}" method="POST">
+    <form class="mx-auto" style="width:80%; margin-top:50px" action="{{route('profile.update', ['customer_email' => Auth::user()->customer_email])}}" method="POST">
         @csrf
         <div>
-            <h1>Edit Profile</h1>
+            <h1 class="text-center" style="margin-bottom: 50px">Edit Profile</h1>
         </div>
         <div class="mb-3 row">
             <label for="namalengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
             <div class="col-sm-10">
-              <input type="text" id="namalengkap" name="customer_name" value="{{$profile->customer_name ?? ''}}">
+              <input type="text" class="form-control border-danger" id="namalengkap" name="customer_name" value="{{$profile->customer_name ?? ''}}">
               <input type="email" id="customer_email" name="customer_email" value="{{$profile->customer_email ?? ''}}" style="display: none;" readonly>
               <input type="password" id="password" name="password" style="display: none;" readonly>
             </div>
@@ -30,21 +30,32 @@
           <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Lahir</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="{{$profile->tgl_lahir ?? ''}}">
+              <input type="date" class="form-control border-danger" id="tgl_lahir" name="tgl_lahir" value="{{$profile->tgl_lahir ?? ''}}">
             </div>
           </div>
           <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPassword" name="nik" value="{{$profile->nik ?? ''}}">
+              <input type="text" class="form-control border-danger" id="inputPassword" name="nik" value="{{$profile->nik ?? ''}}">
             </div>
           </div>
-          <div class="mb-3">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-            <input type="radio" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
-            <label for="gender">Laki-Laki</label>
-            <input type="radio" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
-            <label for="gender">Perempuan</label>
+          <div class="mb-3 row">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">Perempuan</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">Laki-laki</label>
+          </div>
+          </div>
+
+          <div class="mb-3 form-check">
+            <label for="">Jenis Kelamin</label>
+            <input type="radio" class="form-check-input border-danger" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
+            <label for="gender" class="form-check-label">Laki-Laki</label>
+            <input type="radio" class="form-check-input" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
+            <label for="gender" class="form-check-label">Perempuan</label>
           </div>
           <button type="submit" class="btn btn-primary" style="height: 6vh;">Simpan</button>
     </form>

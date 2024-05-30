@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Models\Quiz;
+use App\Models\BuatSim;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('pegawai');
+    }
     public function BuatQuiz(Request $request) {
         $request->validate([
             'questions' => 'required|string',
@@ -65,4 +70,5 @@ class QuizController extends Controller
         $quiz->delete();
         return redirect()->route('show.quiz')->with('success', 'Quiz deleted successfully');
     }
+
 }

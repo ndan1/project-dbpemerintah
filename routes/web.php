@@ -7,6 +7,7 @@ use App\Http\Controllers\PembuatanSim;
 use App\Http\Controllers\PerpanjangSim;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,10 @@ Route::prefix('admin')->group(function () {
     Route::post('pembuatan-sim/{id}/approve', [AdminListPembuatanSim::class, 'approve'])->name('admin.pembuatan-sim.approve');
     Route::post('pembuatan-sim/{id}/reject', [AdminListPembuatanSim::class, 'reject'])->name('admin.pembuatan-sim.reject');
 });
+
+// Route::get('/ujian-teori', function () {
+//     return view('quiz');
+// })->name('quiz');
+Route::get('pembuatan-sim/ujian-teori', [QuizClientController::class, 'ShowQuizClient'])->name('show.quiz.client');
+Route::post('pembuatan-sim/ujian-teori', [QuizClientController::class, 'SubmitQuiz'])->name('submit.quiz');
+Route::post('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
