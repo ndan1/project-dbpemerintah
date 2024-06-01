@@ -194,6 +194,11 @@ span.relative{
   display: none;
 }
 
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
 /* LOGIN REGISTER ADMIN */
 
 
