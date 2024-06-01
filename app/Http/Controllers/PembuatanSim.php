@@ -20,7 +20,7 @@ class PembuatanSim extends Controller
         // Cek status persetujuan permintaan terbaru
         if ($latestRequest) {
             if ($latestRequest->status == 'approved') {
-                return view('quiz');
+                return view('waitquiz');
             } elseif ($latestRequest->status == 'rejected') {
                 $rejectComment = $latestRequest->comments;
                 return view('pembuatansim', compact('profile', 'rejectComment'));

@@ -18,7 +18,9 @@ class BuatSim extends Model
         'surat_sehat',
         'tipe_sim', // Add this
         'status',   // Add this
-        'comments'
+        'comments',
+        'test_score',
+        'last_test_at'
     ];
 
     public function user()

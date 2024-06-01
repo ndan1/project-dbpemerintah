@@ -13,17 +13,17 @@
 </head>
 
 <body>
-    <div class="all-home" style="background-image: url('{{ asset('images/wallpaper.png') }}')">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary bgtrans px-5">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Pemerintah Kota Malang</a>
+    <div class="all-home">
+        <nav class="navbar navbar-expand-lg px-5">
+            <div class="container-fluid nav-master">
+                <a class="navbar-brand nav-master-title" href="#">Pemerintah Kota Malang</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="ms-auto">
+                <div class="ms-auto nav-master-menu">
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -59,8 +59,7 @@
                             </li>
                             @else
                         </ul>
-                        <button><a href="{{url('register')}}">Register</a></button>
-                        <button><a href="{{url('login')}}">Login</a></button>
+                        <button class="btn btn-light btn-rounded"><a href="{{url('login')}}" class="text-decoration-none text-reset">Login</a></button>
                         @endauth
                     </div>
                 </div>
@@ -68,8 +67,9 @@
 
             </div>
         </nav>
+        @yield('scripts')
+        @yield('content')
     </div>
-    @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
