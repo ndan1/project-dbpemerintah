@@ -85,21 +85,12 @@
         @endif
     </div>
 
-<<<<<<< HEAD
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const timerDisplay = document.getElementById('timer');
-        const totalMinutes = 1;
-        let timeRemaining;
-=======
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const timerDisplay = document.getElementById('timer');
             const totalMinutes = 15;
             let timeRemaining;
->>>>>>> 82f541b9206653920b6af97559a8189000783f11
 
             if (!localStorage.getItem('quizStartTime')) {
                 localStorage.setItem('quizStartTime', new Date().getTime());
@@ -145,31 +136,6 @@
 
             document.getElementById('submitBtn').addEventListener('click', function () {
                 submitQuiz();
-<<<<<<< HEAD
-            }
-        }
-
-        const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer();
-
-        function submitQuiz() {
-            var form = document.getElementById('quizForm');
-            form.method = "POST";
-            var formData = new FormData(form);
-            console.log("Masuk");
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                }
-            }).then(response => {
-                if (response.ok) {
-                    localStorage.removeItem('quizStartTime'); // Clear start time from localStorage
-                    window.location.href = "{{ route('result.show') }}"; // Redirect to result page
-                }
-=======
->>>>>>> 82f541b9206653920b6af97559a8189000783f11
             });
 
             document.querySelectorAll('input[name="answer"]').forEach(function (input) {
@@ -178,38 +144,6 @@
                 });
             });
         });
-<<<<<<< HEAD
-
-        document.getElementById('submitBtn').addEventListener('click', function (e) {
-            e.preventDefault();
-            console.log("Masuk");
-            submitQuiz();
-        });
-
-        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                var currentPage = parseInt(document.querySelector('input[name="page"]').value);
-                var pageItem = document.querySelector('.page-item[data-page="' + currentPage + '"]');
-                if (pageItem) {
-                    pageItem.classList.add('page-item-answer');
-                }
-            });
-        });
-
-        document.querySelectorAll('.page-item').forEach(function (item) {
-            var pageLink = item.querySelector('.page-link');
-            if (pageLink) {
-                var page = pageLink.textContent.trim();
-                if (page) {
-                    item.setAttribute('data-page', page);
-                }
-            }
-        });
-    });
-</script>
-
-=======
     </script>
->>>>>>> 82f541b9206653920b6af97559a8189000783f11
 </body>
 </html>

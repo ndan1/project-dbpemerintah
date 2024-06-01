@@ -105,8 +105,4 @@ Route::get('pembuatan-sim/ujian-teori', [QuizClientController::class, 'ShowQuizC
 Route::post('pembuatan-sim/ujian-teori', [QuizClientController::class, 'SubmitQuiz'])->name('submit.quiz');
 Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
 Route::post('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
-<<<<<<< HEAD
-Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
-=======
 // Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore']); // Optional, jika diperlukan akses langsung
->>>>>>> 82f541b9206653920b6af97559a8189000783f11
