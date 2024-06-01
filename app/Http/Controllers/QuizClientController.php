@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\BuatSim;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,60 +14,132 @@ class QuizClientController extends Controller
         $this->middleware('auth');
     }
 
-    public function ShowQuizClient(Request $request) {
-        $profile = auth()->user();
-        $currentPage = $request->query('page', 1);
-        $jenis_sim = BuatSim::where('id_customer', $profile->customer_id)
-                            ->leftJoin('users', 'users.customer_id', '=', 'pembuatan_sim.id_pembuatan')
-                            ->select('tipe_sim')
-                            ->first();
+    public function ShowQuizClient(Request $request)
+{
+    $userId = auth()->user()->customer_id;
+    $buatSim = BuatSim::where('id_customer', $userId)->first();
+    $now = Carbon::now();
+    $lastTestAt = Carbon::parse($buatSim->last_test_at);
 
-        $quizes = Quiz::where('jenis_sim', $jenis_sim->tipe_sim)->paginate(1); // menampilkan 1 soal per halaman
+
+    // if ($buatSim->test_score >= 70) {
+    //     session()->flash('success', 'Selamat! Anda lulus ujian dengan skor yang memuaskan.');
+    //     return view('quizresult', compact('score', 'totalQuestions', 'percentageScore'));
+    // }
+    if ($buatSim->test_score == NULL){
+        $jenisSim = $buatSim->tipe_sim; // default to 'A' if not provided
+
+        $quizes = Quiz::where('jenis_sim', $jenisSim)->paginate(1);
         $answers = session('quiz_answers', []);
-        return view('quiz', compact('quizes', 'currentPage', 'answers'));
+
+        return view('quiz', compact('quizes', 'answers', 'jenisSim'));
+    }
+    if ($buatSim->test_score < 70 && $lastTestAt->diffInHours($now) < 24) {
+        $remainingHours = 24 - $lastTestAt->diffInHours($now);
+        return redirect()->route('home')->with('fail', "Anda harus menunggu $remainingHours jam sebelum dapat mengikuti ujian lagi.");
+    }
+    else{
+        $jenisSim = $buatSim->tipe_sim; // default to 'A' if not provided
+
+        $quizes = Quiz::where('jenis_sim', $jenisSim)->paginate(1);
+        $answers = session('quiz_answers', []);
+
+        return view('quiz', compact('quizes', 'answers', 'jenisSim'));
     }
 
-    public function SubmitQuiz(Request $request)
+}
+
+
+    // public function SubmitQuiz(Request $request)
+    // {
+    //     // Get current page and submitted answer
+    //     $currentPage = $request->input('page');
+    //     $answer = $request->input('answer');
+
+    //     // Save the answer in the session
+    //     $answers = session('quiz_answers', []);
+    //     $answers[$currentPage] = $answer;
+    //     session(['quiz_answers' => $answers]);
+
+    //     // Redirect to the next page
+    //     return redirect()->route('show.quiz.client', ['page' => $currentPage + 1]);
+    // }
+
+    public function submitQuiz(Request $request)
     {
-        // Get current page and submitted answer
         $currentPage = $request->input('page');
         $answer = $request->input('answer');
+        $jenisSim = $request->input('jenis_sim');
 
-        // Save the answer in the session
-        $answers = session('quiz_answers', []);
-        $answers[$currentPage] = $answer;
-        session(['quiz_answers' => $answers]);
+        // Ambil jawaban yang sudah ada dari session
+        $existingAnswers = session('quiz_answers', []);
 
-        // Redirect to the next page
-        return redirect()->route('show.quiz.client', ['page' => $currentPage + 1]);
-    }
+        // Jika $existingAnswers bukan array, ubah menjadi array kosong
+        if (!is_array($existingAnswers)) {
+            $existingAnswers = [];
+        }
 
-    public function calculateScore(Request $request) {
-        $answer = $request->input('answer');
-        $page = $request->input('page');
+        // Simpan jawaban dari pengguna berdasarkan halaman saat ini
+        $existingAnswers[$currentPage] = $answer;
+
+        // Simpan jawaban yang diperbarui ke session
+        session(['quiz_answers' => $existingAnswers]);
+        session(['jenis_sim' => $jenisSim]);
+
         $lastPage = $request->input('last_page');
-        $answers = session('quiz_answers', []);
-        Session::put('last_page', $lastPage);
-
-        // Hitung skor
-        $score = 0;
-        foreach ($answers as $page => $answer) {
-            $quiz = Quiz::find($page);
-            if ($quiz && $quiz->answer == $answer) {
-                $score++;
-            }
-        }
-
-        $total = $score * 10;
-
-        if ($total >= 70) {
-            return view('quizresult', ['total' => $total])
-                ->with('success', 'Anda telah lolos ujian teori. Selanjutnya, lakukan pembayaran dan pilih jadwal untuk melakukan ujian praktek.');
+        if ($currentPage < $lastPage) {
+            return redirect()->route('show.quiz.client', ['page' => $currentPage + 1, 'jenis_sim' => $jenisSim]);
         } else {
-            return view('quizresult', ['total' => $total])
-                ->with('fail', 'Anda tidak lolos ujian teori. Anda harus menunggu 24 jam untuk melakukan ujian teori ulang.');
+            return redirect()->route('result.show');
         }
     }
+
+
+
+    public function calculateScore()
+{
+    // Ambil jawaban pengguna dari session
+    $answers = session('quiz_answers', []);
+    $jenisSim = session('jenis_sim', 'A');
+    $userId = auth()->user()->customer_id;
+
+    // Ambil jawaban yang benar dari database berdasarkan jenis_sim dan urutkan berdasarkan question_id
+    $questions = Quiz::where('jenis_sim', $jenisSim)->orderBy('question_id')->get();
+
+    $score = 0;
+    $totalQuestions = $questions->count();
+    $correctAnswers = $questions->pluck('answer', 'question_id')->toArray();
+
+    // Bandingkan jawaban pengguna dengan jawaban yang benar berdasarkan urutan
+    foreach ($answers as $page => $userAnswer) {
+        // Cari question_id berdasarkan urutan halaman
+        $question = $questions->get($page - 1);
+        if ($question && $correctAnswers[$question->question_id] == $userAnswer) {
+            $score++;
+        }
+    }
+
+    $percentageScore = ($score / $totalQuestions) * 100;
+
+    $buatSim = BuatSim::where('id_customer', $userId)->first();
+    if ($buatSim) {
+        $buatSim->test_score = $percentageScore;
+        $buatSim->last_test_at = Carbon::now();
+        $buatSim->save();
+    }
+
+    if ($percentageScore >= 70) {
+        session()->flash('success', 'Selamat! Anda lulus ujian dengan skor yang memuaskan.');
+    } else {
+        session()->flash('fail', 'Maaf, Anda belum lulus ujian. Silakan coba lagi.');
+    }
+
+    return view('quizresult', compact('score', 'totalQuestions', 'percentageScore'));
+}
+
+
+
+
 
 
 

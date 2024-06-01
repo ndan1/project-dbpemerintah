@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .page-item-answer .page-link {
             background-color: #28a745;
@@ -15,98 +15,137 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-danger">
-
-        <div id="timer" class="mx-auto bg-body-tertiary" style="padding: 7px 15px;border-radius:10%"></div>
+        <div id="timer" class="mx-auto bg-body-tertiary" style="padding: 7px 15px; border-radius: 10%"></div>
     </nav>
-<div class="container" style="margin-top: 100px">
-    @if ($quizes->count() > 0)
-        @foreach ($quizes as $quiz)
-            <div class="card mb-4">
-                <div class="card-header">
-                    Pertanyaan {{ $quizes->currentPage() }}
+    <div class="container" style="margin-top: 100px">
+        @if ($quizes->count() > 0)
+            @foreach ($quizes as $quiz)
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Pertanyaan {{ $quizes->currentPage() }}
+                    </div>
+                    <div class="card-body">
+                        <form id="quizForm" action="{{ route('submit.quiz') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="page" value="{{ $quizes->currentPage() }}">
+                            <input type="hidden" name="last_page" value="{{ $quizes->lastPage() }}">
+                            <input type="hidden" name="jenis_sim" value="{{ $jenisSim }}"> <!-- jenis SIM -->
+                            <input type="hidden" name="question_id" value="{{ $quiz->question_id }}"> <!-- Question ID -->
+                            <h5 class="card-title">{{ $quiz->questions }}</h5>
+                            <div class="form-group">
+                                <label>
+                                    <input type="radio" name="answer" value="A" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'A') ? 'checked' : '' }}> {{ $quiz->opsiA }}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="radio" name="answer" value="B" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'B') ? 'checked' : '' }}> {{ $quiz->opsiB }}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="radio" name="answer" value="C" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'C') ? 'checked' : '' }}> {{ $quiz->opsiC }}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="radio" name="answer" value="D" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'D') ? 'checked' : '' }}> {{ $quiz->opsiD }}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form id="quizForm" action="{{ route('submit.quiz') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="page" value="{{ $quizes->currentPage() }}">
-                        <input type="hidden" name="last_page" value="{{ $quizes->lastPage() }}">
-                        <h5 class="card-title">{{ $quiz->questions }}</h5>
-                        <div class="form-group">
-                            <label>
-                                <input type="radio" name="answer" value="A" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'A') ? 'checked' : '' }}> {{ $quiz->opsiA }}
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <input type="radio" name="answer" value="B" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'B') ? 'checked' : '' }}> {{ $quiz->opsiB }}
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <input type="radio" name="answer" value="C" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'C') ? 'checked' : '' }}> {{ $quiz->opsiC }}
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <input type="radio" name="answer" value="D" {{ (isset($answers[$quizes->currentPage()]) && $answers[$quizes->currentPage()] == 'D') ? 'checked' : '' }}> {{ $quiz->opsiD }}
-                            </label>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation" style="margin-top: 50px">
-            <ul class="pagination justify-content-center">
-                @if ($quizes->onFirstPage())
-                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
-                @else
-                    <li class="page-item"><a class="page-link" href="{{ $quizes->previousPageUrl() }}">Previous</a></li>
-                @endif
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" style="margin-top: 50px">
+                <ul class="pagination justify-content-center">
+                    @if ($quizes->onFirstPage())
+                        <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                    @else
+                        <li class="page-item"><a class="page-link" href="{{ $quizes->previousPageUrl() }}&jenis_sim={{ $jenisSim }}">Previous</a></li>
+                    @endif
 
-                @foreach ($quizes->getUrlRange(1, $quizes->lastPage()) as $page => $url)
-                    <li class="page-item {{ $page == $quizes->currentPage() ? 'active' : '' }} {{ isset($answers[$page]) ? 'page-item-answer' : '' }}" data-page="{{ $page }}">
-                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                    </li>
-                @endforeach
+                    @foreach ($quizes->getUrlRange(1, $quizes->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $quizes->currentPage() ? 'active' : '' }} {{ isset($answers[$page]) ? 'page-item-answer' : '' }}" data-page="{{ $page }}">
+                            <a class="page-link" href="{{ $url }}&jenis_sim={{ $jenisSim }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
 
-                @if ($quizes->hasMorePages())
-                    <li class="page-item"><a id="nextBtn" class="page-link" href="#">Next</a></li>
-                @else
-                    <li class="page-item disabled" style="display: none"><a class="page-link">Next</a></li>
-                    <li class="page-item"><button id="submitBtn" class="page-link">Submit</button></li>
-                @endif
-            </ul>
-        </nav>
-    @else
-        <p>No quizzes available.</p>
-    @endif
-</div>
+                    @if ($quizes->hasMorePages())
+                        <li class="page-item"><a id="nextBtn" class="page-link" href="#">Next</a></li>
+                    @else
+                        <li class="page-item"><a id="nextBtn" class="page-link" href="#">Next</a></li>
+                        <li class="page-item"><button id="submitBtn" type="button" class="page-link">Submit</button></li>
+                    @endif
+                </ul>
+            </nav>
+        @else
+            <p>No quizzes available.</p>
+        @endif
+    </div>
 
+<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const timerDisplay = document.getElementById('timer');
         const totalMinutes = 1;
         let timeRemaining;
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const timerDisplay = document.getElementById('timer');
+            const totalMinutes = 15;
+            let timeRemaining;
+>>>>>>> 82f541b9206653920b6af97559a8189000783f11
 
-        // Initialize or retrieve start time
-        if (!localStorage.getItem('quizStartTime')) {
-            localStorage.setItem('quizStartTime', new Date().getTime());
-        }
-        const quizStartTime = parseInt(localStorage.getItem('quizStartTime'));
+            if (!localStorage.getItem('quizStartTime')) {
+                localStorage.setItem('quizStartTime', new Date().getTime());
+            }
+            const quizStartTime = parseInt(localStorage.getItem('quizStartTime'));
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            timeRemaining = totalMinutes * 60 - Math.floor((now - quizStartTime) / 1000);
+            function updateTimer() {
+                const now = new Date().getTime();
+                timeRemaining = totalMinutes * 60 - Math.floor((now - quizStartTime) / 1000);
 
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            if (timeRemaining <= 0) {
-                clearInterval(timerInterval);
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }
+
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer();
+
+            function submitQuiz() {
+                var form = document.getElementById('quizForm');
+                var formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        localStorage.removeItem('quizStartTime');
+                        window.location.href = "{{ route('result.show') }}";
+                    }
+                });
+            }
+
+            document.getElementById('nextBtn').addEventListener('click', function () {
+                document.getElementById('quizForm').submit();
+            });
+
+            document.getElementById('submitBtn').addEventListener('click', function () {
                 submitQuiz();
+<<<<<<< HEAD
             }
         }
 
@@ -129,27 +168,17 @@
                     localStorage.removeItem('quizStartTime'); // Clear start time from localStorage
                     window.location.href = "{{ route('result.show') }}"; // Redirect to result page
                 }
+=======
+>>>>>>> 82f541b9206653920b6af97559a8189000783f11
             });
-        }
 
-        document.getElementById('nextBtn').addEventListener('click', function (e) {
-            e.preventDefault();
-            var nextPageUrl = '{{ $quizes->nextPageUrl() }}';
-
-            var form = document.getElementById('quizForm');
-            var formData = new FormData(form);
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = nextPageUrl;
-                }
+            document.querySelectorAll('input[name="answer"]').forEach(function (input) {
+                input.addEventListener('change', function () {
+                    document.getElementById('nextBtn').removeAttribute('disabled');
+                });
             });
         });
+<<<<<<< HEAD
 
         document.getElementById('submitBtn').addEventListener('click', function (e) {
             e.preventDefault();
@@ -179,5 +208,8 @@
     });
 </script>
 
+=======
+    </script>
+>>>>>>> 82f541b9206653920b6af97559a8189000783f11
 </body>
 </html>
