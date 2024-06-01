@@ -26,8 +26,8 @@
                     <p>D. {{$quiz->opsiD}}</p>
                 </td>
                 <td>
-                    <button><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary"><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Hapus
                       </button>
 
@@ -69,8 +69,8 @@
                         <p>D. {{$quiz->opsiD}}</p>
                     </td>
                     <td>
-                        <button><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hapus-sim-c">
+                        <button type="button" class="btn btn-primary"><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-sim-c">
                             Hapus
                           </button>
 

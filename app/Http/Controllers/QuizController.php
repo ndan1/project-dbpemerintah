@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\BuatSim;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Session;
 
 class QuizController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('pegawai');
-    }
     public function BuatQuiz(Request $request) {
         $request->validate([
             'questions' => 'required|string',

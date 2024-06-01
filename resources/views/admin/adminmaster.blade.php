@@ -81,6 +81,12 @@
           <li>
             <a href="#" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+              Berita
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
               Jadwal Kedatangan
             </a>
           </li>

@@ -32,6 +32,10 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::get('/tentang', function () {
+    return view('tentang');
+})->name('tentang');
+
 Route::get('/profile/{customer_email}', [ProfileController::class, 'show'])->name('profile');
 Route::post('/profile/{customer_email}', [ProfileController::class, 'store'])->name('profile.update');
 
@@ -100,3 +104,4 @@ Route::prefix('admin')->group(function () {
 Route::get('pembuatan-sim/ujian-teori', [QuizClientController::class, 'ShowQuizClient'])->name('show.quiz.client');
 Route::post('pembuatan-sim/ujian-teori', [QuizClientController::class, 'SubmitQuiz'])->name('submit.quiz');
 Route::post('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
+Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');

@@ -88,7 +88,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const timerDisplay = document.getElementById('timer');
-        const totalMinutes = 15;
+        const totalMinutes = 1;
         let timeRemaining;
 
         // Initialize or retrieve start time
@@ -117,6 +117,7 @@
             var form = document.getElementById('quizForm');
             form.method = "POST";
             var formData = new FormData(form);
+            console.log("Masuk");
             fetch(form.action, {
                 method: form.method,
                 body: formData,
@@ -152,6 +153,7 @@
 
         document.getElementById('submitBtn').addEventListener('click', function (e) {
             e.preventDefault();
+            console.log("Masuk");
             submitQuiz();
         });
 

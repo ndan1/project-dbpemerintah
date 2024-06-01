@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\BuatSim;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class QuizClientController extends Controller
 {
