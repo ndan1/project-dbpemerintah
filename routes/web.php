@@ -75,14 +75,6 @@ Route::get('/adminlogin', function () {
 Route::post('/loginadmin',[LoginRegisterController::class, 'loginadmin'])->name('login.admin');
 Route::get('/logoutadmin', [LoginRegisterController::class, 'logoutadmin'])->name('logoutadmin');
 
-// Route::get('/adminpembuatan', function () {
-//     return view('admin/adminpembuatansim');
-// })->name('adminpembuatan');
-
-// Route::resource("/adminpembuatan", AdminListPembuatanSim::class);
-// Route::get('/adminpembuatan',[AdminListPembuatanSim::class, 'index'])->name('list-pembuatan-sim');
-// Route::get('/pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'show'])->name('pembuatan-sim.show');
-
 Route::prefix('admin')->group(function () {
     Route::get('tambah-quiz', function () {
         return view('admin.createQuiz');

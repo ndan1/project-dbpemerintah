@@ -29,7 +29,7 @@
           <div class="mb-3 row">
             <label for="tipe_sim" class="col-sm-2 col-form-label">Tipe SIM</label>
             <div class="col-sm-10">
-                <select class="form-control border-danger" id="tipe_sim" name="tipe_sim">
+                <select class="form-control border-danger form-select" id="tipe_sim" name="tipe_sim">
                     <option value="A">SIM A</option>
                     <option value="C">SIM C</option>
                 </select>
@@ -59,12 +59,15 @@
               <input type="file" class="form-control border-danger" id="surat_sehat" name="surat_sehat">
             </div>
           </div>
-          <div class="mb-3 row">
+          <div class="mb-4 row">
             <label for="foto_sim" class="col-sm-2 col-form-label">Foto SIM</label>
             <div class="col-sm-10">
               <input type="file" class="form-control border-danger" id="foto_sim" name="foto_sim">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary text-end" style="height: 6vh;">Simpan</button>
+          <div class="text-center">
+
+              <button type="submit" class="btn btn-primary" style="height: 6vh;">Simpan</button>
+          </div>
     </form>
     @endsection

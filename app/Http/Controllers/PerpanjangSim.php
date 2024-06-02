@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BuatSim;
 use App\Models\PanjangSim;
+use App\Models\User;
 
 class PerpanjangSim extends Controller
 {
@@ -14,7 +15,14 @@ class PerpanjangSim extends Controller
 
     public function show() {
         $profile = auth()->user();
+        $biodata = User::where('customer_id', $profile->id_customer)->value('tgl_lahir');
+        if ($biodata==NULL) {
+            return redirect()->route('profile', ['customer_email' => $profile->customer_email])->with('message', 'Lengkapi profile terlebih dahulu untuk mendaftarkan SIM!');
+
+        }
+        else {
         return view('perpanjangsim', compact('profile'));
+        }
     }
 
     public function store(Request $request){

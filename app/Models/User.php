@@ -27,7 +27,12 @@ class User extends Authenticatable
         'password',
         'tgl_lahir',
         'nik',
-        'gender'
+        'gender',
+        'tempat_lahir',
+        'goldar',
+        'provinsi',
+        'alamat',
+        'pekerjaan'
     ];
 
     /**

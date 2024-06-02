@@ -10,11 +10,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family:"Josefin Sans", sans-serif;
+                background-color: rgb(179, 141, 72);
+            }
+        </style>
 </head>
 
 <body style="overflow-y: hidden;">
     <div class="bg-mlg">
-        <div class="card main-card">
+        <div class="card main-card mx-auto" style="width: 80%;margin:42.5px 0;padding-right:11px">
             <div class="row">
                 <div class="col-5 side-image">
                     <h4 style="position: absolute; padding-left: 6vw;padding-top: 5vh;">Selamat Datang di Website
@@ -22,7 +31,7 @@
                     <img src="{{ asset('images/wallpaper.png') }}" alt="gambar"
                         style="max-width:90vw;max-height:88.65vh;z-index:-1;background-size: cover; border-radius: 1px;">
                 </div>
-                <div class="col-7 side-form form-position">
+                <div class="col-7 side-form form-position" style="background: wheat;border-radius:0 5px 5px 0"">
                     @if ($errors->any())
                         <div class="col-12">
                             @foreach ($errors->all() as $error)
@@ -37,13 +46,13 @@
                     @if (session()->has('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    <h2 class="mb-4" style="margin: 0 auto">REGISTER</h2>
+                    <h2 class="mb-4 text-center" style="margin: 80px auto">REGISTER</h2>
                     <form action="{{ route('registering') }}" method="POST" id="form1">
                         @csrf
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 mx-auto" style="width: 80%">
                             <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
                             <div class="form-floating">
-                                <input type="text" class="form-control @error('customer_email') is-invalid @enderror" id="name" name="customer_name"
+                                <input type="text" class="form-control @error('customer_name') is-invalid @enderror" id="name" name="customer_name"
                                     placeholder="Nama Lengkap" required>
                                 <label for="name">Nama Lengkap</label>
                             </div>
@@ -53,7 +62,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 mx-auto" style="width: 80%">
                             <span class="input-group-text">@</span>
                             <div class="form-floating">
                                 <input type="email" class="form-control @error('customer_email') is-invalid @enderror" id="email" name="customer_email"
@@ -69,7 +78,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 mx-auto" style="width: 80%">
                             <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
                             <div class="form-floating">
                                 <input type="password"
@@ -88,7 +97,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-4 mx-auto" style="width: 80%">
                                 <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
 
                             <div class="form-floating">
@@ -105,8 +114,8 @@
                                 </span>
                             @enderror
 
-                        <div class="register-button-position">
-                            <button type="submit" form="form1" value="submit">Submit</button>
+                        <div class="register-button-position text-center">
+                            <button class="btn btn-primary mb-4" type="submit" form="form1" value="submit">Submit</button>
                             <p>Apakah Anda sudah memiliki akun? <a href="{{ url('login') }}">Masuk</a></p>
                         </div>
                     </form>

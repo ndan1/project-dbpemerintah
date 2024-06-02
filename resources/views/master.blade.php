@@ -10,14 +10,22 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: "Josefin Sans", sans-serif;
+        }
+    </style>
+</head>
 
 <body>
     <div class="all-home">
         <nav class="navbar navbar-expand-lg px-5">
             <div class="container-fluid nav-master">
-                <a class="navbar-brand nav-master-title" href="#">Pemerintah Kota Malang</a>
+                <a class="navbar-brand nav-master-title" href="#" style="color:white">Pemerintah Kota Malang</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -27,40 +35,44 @@
                 <div class="ms-auto nav-master-menu">
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+                            <li class="nav-item mx-4">
+                                <a class="nav-link" href="{{ route('home') }}" {{ request()->is('home') ? 'active' : '' }}>Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{url('tentang')}}">Tentang</a>
+                            <li class="nav-item mx-4">
+                                <a class="nav-link" href="{{ url('tentang') }} {{ request()->is('tentang') ? 'active' : '' }}">Tentang</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="nav-item mx-4 dropdown">
+                                <a class="nav-link dropdown-toggle" href="" role="button"
+                                    data-bs-toggle="dropdown" {{ request()->is('pembuatan-sim')||request()->is('perpanjang-sim') ? 'active' : '' }} aria-expanded="false">
                                     SIM
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('pembuatan-sim')}}">Pembuatan SIM</a></li>
-                                    <li><a class="dropdown-item" href="{{route('perpanjang-sim')}}">Perpanjangan SIM</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('pembuatan-sim') }}" style="color: black">Pembuatan SIM</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('perpanjang-sim') }}" style="color: black">Perpanjangan
+                                            SIM</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Berita</a>
+                            <li class="nav-item mx-4">
+                                <a class="nav-link" href="#" {{ request()->is('berita') ? 'active' : '' }}>Berita</a>
                             </li>
                             @auth
-                            <li class="nav-item dropdown" style="list-style-type: none;">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false" >
-                                    Profil
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('profile', ['customer_email' => Auth::user()->customer_email])}}">Edit Profil</a></li>
-                                    <li><a class="dropdown-item" href="">Edit Akun</a></li>
-                                    <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
-                                </ul>
-                            </li>
+                                <li class="nav-item mx-5 dropdown" style="list-style-type: none;">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" {{ request()->is('profile') ? 'active' : '' }} aria-expanded="false">
+                                        Profil
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('profile', ['customer_email' => Auth::user()->customer_email]) }}" style="color: black">Lengkapi Data</a></li>
+                                        <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}" style="color: black">Logout</a></li>
+                                    </ul>
+                                </li>
                             @else
-                        </ul>
-                        <button class="btn btn-light btn-rounded"><a href="{{url('login')}}" class="text-decoration-none text-reset">Login</a></button>
+                            </ul>
+                            <button class="btn btn-light btn-rounded"><a href="{{ url('login') }}"
+                                    class="text-decoration-none text-reset">Login</a></button>
                         @endauth
                     </div>
                 </div>

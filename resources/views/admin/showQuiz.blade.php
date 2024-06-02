@@ -2,7 +2,10 @@
 
 @section('content')
 <div>
-<button type="button" class="btn btn-success"><a href="{{route('createQuiz')}}">Tambah Quiz</a></button>
+    <div class="text-end" style="margin: 20px 20px">
+
+        <button type="button" class="btn btn-success"><a href="{{route('createQuiz')}}">Tambah Quiz</a></button>
+    </div>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link {{ $tab == 'SIM-A' ? 'active' : '' }}" id="home-tab" href="{{ route('show.quiz', ['tab' => 'SIM-A']) }}" role="tab" aria-controls="home-tab-pane" aria-selected="{{ $tab == 'SIM-A' ? 'true' : 'false' }}">SIM A</a>

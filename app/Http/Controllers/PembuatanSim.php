@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BuatSim;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+// use App\Http\Controllers\Log;
 
 class PembuatanSim extends Controller
 {
@@ -13,25 +17,36 @@ class PembuatanSim extends Controller
 
     public function show() {
         $profile = auth()->user();
-        // dd($profile->customer_id);
         $latestRequest = BuatSim::where('id_customer', $profile->customer_id)->latest()->first();
-        // dd($latestRequest);
-
-        // Cek status persetujuan permintaan terbaru
+        $biodata = User::where('customer_id', $profile->customer_id)->value('tgl_lahir');
+        $tahun = Carbon::parse($biodata)->age;
+        Log::debug('Latest Request: ', [$latestRequest]);
+    Log::debug('Biodata (tgl_lahir): ', [$biodata]);
         if ($latestRequest) {
-            if ($latestRequest->status == 'approved') {
-                return view('waitquiz');
-            } elseif ($latestRequest->status == 'rejected') {
-                $rejectComment = $latestRequest->comments;
-                return view('pembuatansim', compact('profile', 'rejectComment'));
-            } else {
-                // return view('pembuatansim', compact('profile'));
-                return view('menunggu_respon_admin');
+            switch ($latestRequest->status) {
+                case 'approved':
+                    return view('waitquiz');
+                case 'rejected':
+                    $rejectComment = $latestRequest->comments;
+                    return view('pembuatansim', compact('profile', 'rejectComment'));
+                default:
+                    return view('menunggu_respon_admin');
             }
         } else {
-            return view('pembuatansim', compact('profile'));
+            if ($biodata==NULL) {
+                return redirect()->route('profile', ['customer_email' => $profile->customer_email])->with('message', 'Lengkapi profile terlebih dahulu untuk mendaftarkan SIM!');
+
+            }
+            elseif($tahun<17) {
+                return redirect()->route('home', ['customer_email' => $profile->customer_email])->with('message', 'Umur Anda belum cukup untuk melakukan pembuatan atau perpanjangan SIM.');
+            }
+            else {
+
+                return view('pembuatansim', compact('profile'));
+            }
         }
     }
+
 
     public function store(Request $request){
         $request->validate([

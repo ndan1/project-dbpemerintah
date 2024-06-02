@@ -2,10 +2,10 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" style="width:70%;margin-left: 100px">
     <div class="row">
-        <div class="col-12" style="padding:10px;">
-            <div class="card" style="width: 90%;">
+        <div class="col-15" style="padding:10px;">
+            <div class="card" style="width: 100%;">
                 <div class="card-header">Antrian Pembuatan SIM</div>
                 <div class="card-body">
                     <div class="table-responsive">
