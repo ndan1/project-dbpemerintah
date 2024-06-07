@@ -16,7 +16,7 @@ class LoginRegisterController extends Controller {
         $request->validate([
             'customer_name' => 'required|string|max:250',
             'customer_email' => 'required|email|max:250|unique:users',
-            'customer_password' => 'required|min:8'
+            'customer_password' => 'required|min:8|confirmed'
         ]);
 
         $data['customer_name'] = $request->customer_name;

@@ -6,16 +6,41 @@ html, body {
     margin: 0;
 }
 
-.nav-master-title{
-    padding-left: 7vw;
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10; /* Lebih tinggi dari .home-jumbotron */
+    background: rgba(31, 100, 32, 0.8); /* Transparansi untuk melihat background di belakangnya */
 }
 
-.nav-master-menu{
-    padding-right: 8vw;
-    font-size: 1.2vw;
+.nav-item a {
+    text-decoration: none;
+    color: white;
 }
 
-/* Title Typing animation home */
+.nav-link.active a {
+    border-bottom: 2px solid white; /* Ganti dengan warna dan ketebalan yang Anda inginkan */
+}
+
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.home-jumbotron {
+    background-image: url('../../public/images/wallpaper_bromo.jpg');
+    background-size: cover;
+    height: 100vh; /* Menggunakan tinggi viewport untuk menutupi seluruh layar */
+    width: 100%;
+    background-attachment: fixed;
+    padding-top: 150px;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Lebih rendah dari .navbar */
+}
 
 .container-home {
     margin: auto;
@@ -24,7 +49,8 @@ html, body {
     align-items: center;
     flex-direction: column;
     width: 80%;
-    margin-top: 120px;
+    position: relative;
+    /* padding-top: 200px; */
     min-height: 400px;
     text-align: center;
     background-color: rgba(182, 182, 182, 0.5);
@@ -55,167 +81,76 @@ html, body {
     50% { border-color: rgb(0, 0, 0); }
 }
 
-/* Add this to stop blinking after typing */
 .typewriter.typing-complete {
     animation: none;
     border-right: none;
 }
 
-.home-jumbotron{
-    background-image: url('../../public/images/wallpaper_bromo.jpg');
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+.malang {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    padding: 20px;
+    padding-top: 100px;
+}
+
+.malang h1 {
+    margin-bottom: 50px;
+}
+
+.gambar-mlg h6 {
+    color: transparent;
+    font-size: 30px;
+}
+
+.gambar-mlg:hover h6 {
+    color: white;
+    transform: translateY(-150px);
+    transition: 1s;
+}
+.gambar-mlg:hover img {
+    filter: blur(2px);
+    transition: 1s;
+}
+
+.gambar-mlg img {
+    width: 450px;
+    height: 280px;
+}
+
+.tentang {
+    background-color: brown;
+    color: white;
 }
 
 .home-content {
     display: flex;
     justify-content: space-around;
-
 }
 
-.home-img img{
+.home-img img {
     min-width: 100px;
     max-width: 300px;
 }
 
-.home-paragraph{
+.home-paragraph {
     font-size: 18px;
     max-width: 800px;
 }
 
-.nav-item {
-    margin: 10px;
-}
-
-.input-group {
-    max-width: 80%;
-    margin:auto;
-}
-
-.register-button-position{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.card {
-    width: 90vw;
-    height:90vh;
-    margin: 5vh auto;
-    position:relative;
-    padding-right: 2vw;
-}
-
-.side-form{
-    background-color: white;
-    z-index: 0;
-    /* border: 2px solid black; */
-}
-
-/* .main-card img {
-    object-fit: fill;
-} */
-
-.form-position {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.form-container{
-    width: 50%;
-    margin: auto;
-    /* border: 2px solid black; */
-    padding: 3vw;
-    border-radius: 2vw;
-    margin-top: 3vh;
-}
-
-/* .form-container .row {
-    position: relative;
-}
-.form-container .row::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 15%;
-    border-left: 3px solid #000;
-    height: 150%;
-} */
-
-/* form {
-    background-color: red;
-    color: blue;
-} */
-
-
-
-/* ADMIN PANEL HOME*/
-.container-count-all{
-    display: flex;
-    justify-content: center;
-    width: 78vw;
-    height: 20vh;
-    margin: 0;
-}
-
-.container-count-antrian{
-    font-size: 2vw;
-    width: 15vw;
-    height: 10vw;
-    border: 2px solid black;
-    margin: 1em;
-    padding: 1vw;
-    border-radius: 1em;
-}
-
-.link-sidebar{
-    color: black;
-}
-
-.count-antrian-text{
-    font-size: 1.5vw;
-    text-align: center;
-}
-
-/* PAGINATION */
-a.relative{
-    text-decoration: none;
-    color: black;
-}
-
-span.relative{
-  display: none;
-}
-
-.btn a {
-    text-decoration: none;
-    color: white;
-}
-
-/* LOGIN REGISTER ADMIN */
-
-
-@media screen and (max-width:475px){
-    .side-image{
+/* Responsive design */
+@media screen and (max-width: 475px) {
+    .side-image {
         display: none;
     }
 }
 
-@media screen and (max-width:900px){
-
+@media screen and (max-width: 900px) {
     .card {
         width: 90vw;
-        height:90vh;
+        height: 90vh;
         margin: 5vh auto;
-        position:relative;
+        position: relative;
         padding-right: 1.5vh;
     }
-
 }

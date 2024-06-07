@@ -24,21 +24,45 @@
             </p>
         </div>
     </div>
-    {{-- <div class="home-content" style="border: 2px solid black">
-        <div class="home-img">
-            <img src="{{asset('images/Logo_Kota_Malang.png')}}" alt="Logo Kota Malang">
-        </div>
-        <div class="home-text">
-            <h2>MALANG KUCECWARA</h2>
-        </div>
-    </div> --}}
 </div>
+    <div class="malang" style="background-color: white">
+        <h1 class="text-center">Julukan Kota Malang</h1>
+        <div class="d-flex flex-row justify-content-evenly mb-3">
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-malang.jpg')}}" alt="">
+                <h6>Kota Sejarah</h6>
+            </div>
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-industri.jpg')}}" alt="">
+                <h6>Kota Industri</h6>
+            </div>
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-bunga.jpg')}}" alt="">
+                <h6>Kota Bunga</h6>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-evenly mb-3">
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-pendidikan.jpg')}}" alt="">
+                <h6>Kota Pendidikan</h6>
+            </div>
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-wisata.jpg')}}" alt="">
+                <h6>Kota Wisata</h6>
+            </div>
+            <div class="p-2 gambar-mlg text-center">
+                <img src="{{asset('images/kota-apel.jpg')}}" alt="">
+                <h6>Kota Apel</h6>
+            </div>
+          </div>
+    </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const typewriter = document.querySelector('.typewriter');
         setTimeout(() => {
             typewriter.classList.add('typing-complete');
-        }, 4100); // 4s for typing + 1s delay
+        }, 4100);
     });
 </script>
 

@@ -2,7 +2,10 @@
 
 @section('content')
 <div>
-<button type="button" class="btn btn-success"><a href="{{route('createQuiz')}}">Tambah Quiz</a></button>
+    <div class="text-end" style="margin: 20px 20px">
+
+        <button type="button" class="btn btn-success"><a href="{{route('createQuiz')}}">Tambah Quiz</a></button>
+    </div>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <a class="nav-link {{ $tab == 'SIM-A' ? 'active' : '' }}" id="home-tab" href="{{ route('show.quiz', ['tab' => 'SIM-A']) }}" role="tab" aria-controls="home-tab-pane" aria-selected="{{ $tab == 'SIM-A' ? 'true' : 'false' }}">SIM A</a>
@@ -26,8 +29,8 @@
                     <p>D. {{$quiz->opsiD}}</p>
                 </td>
                 <td>
-                    <button><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary"><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Hapus
                       </button>
 
@@ -69,8 +72,8 @@
                         <p>D. {{$quiz->opsiD}}</p>
                     </td>
                     <td>
-                        <button><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hapus-sim-c">
+                        <button type="button" class="btn btn-primary"><a href="{{route('edit.quiz', ['id' => $quiz->question_id])}}">Edit</a></button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-sim-c">
                             Hapus
                           </button>
 

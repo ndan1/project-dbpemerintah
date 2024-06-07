@@ -41,6 +41,10 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+Route::get('/tentang', function () {
+    return view('tentang');
+})->name('tentang');
+
 Route::get('/profile/{customer_email}', [ProfileController::class, 'show'])->name('profile');
 Route::post('/profile/{customer_email}', [ProfileController::class, 'store'])->name('profile.update');
 

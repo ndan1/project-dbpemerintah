@@ -47,13 +47,15 @@
                   </div>
             </div>
 
-            <div class="p-2 g-col-6 mx-auto">
-                <label for="sim">Jenis SIM : </label>
-      <select name="jenis_sim" id="sim">
-        <option value="A">SIM A</option>
-        <option value="C">SIM C</option>
-      </select>
+            <div>
+            <select name="jenis_sim" id="sim" class="form-select" aria-label="Default select example">
+                <option selected value="A">SIM A</option>
+                {{-- <option value="A">SIM A</option> --}}
+                <option value="B">SIM C</option>
+              </select>
             </div>
+
+
             <div class="p-2 g-col-6 mx-auto">
                 <button type="submit">Submit</button>
             </div>

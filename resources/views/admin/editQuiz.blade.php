@@ -46,14 +46,19 @@
                     <label class="form-label" for="textAreaExample">Opsi D</label>
                   </div>
             </div>
+            <select name="jenis_sim" id="sim" class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="A" {{ $quiz->jenis_sim == 'A' ? 'selected' : '' }}>SIM A</option>
+                <option value="B" {{ $quiz->jenis_sim == 'C' ? 'selected' : '' }}>SIM C</option>
+              </select>
 
-            <div class="p-2 g-col-6 mx-auto">
+            {{-- <div class="p-2 g-col-6 mx-auto">
                 <label for="sim">Jenis SIM : </label>
       <select name="jenis_sim" id="sim">
         <option value="A" {{ $quiz->jenis_sim == 'A' ? 'selected' : '' }}>SIM A</option>
         <option value="C" {{ $quiz->jenis_sim == 'C' ? 'selected' : '' }}>SIM C</option>
       </select>
-            </div>
+            </div> --}}
             <div class="p-2 g-col-6 mx-auto">
                 <button type="submit">Submit</button>
             </div>
