@@ -1,7 +1,9 @@
 @extends('master')
 
 @section('content')
-
+@if (session()->has('fail'))
+                        <div class="alert alert-danger">{{ session('fail') }}</div>
+                    @endif
 <div class="home-jumbotron">
     {{-- <div class="typewriter">
         <h1>Selamat Datang di Website Pemerintah Kota Malang</h1>

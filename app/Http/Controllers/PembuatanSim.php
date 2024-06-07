@@ -19,7 +19,10 @@ class PembuatanSim extends Controller
 
         // Cek status persetujuan permintaan terbaru
         if ($latestRequest) {
-            if ($latestRequest->status == 'approved') {
+            if ($latestRequest->status == 'approved' && $latestRequest->test_score >= 70) {
+                return redirect('pembuatan-sim/pembayaran');
+            }
+            elseif ($latestRequest->status == 'approved') {
                 return view('waitquiz');
             } elseif ($latestRequest->status == 'rejected') {
                 $rejectComment = $latestRequest->comments;

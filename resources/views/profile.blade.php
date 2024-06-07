@@ -38,26 +38,15 @@
             <div class="col-sm-10">
               <input type="text" class="form-control border-danger" id="inputPassword" name="nik" value="{{$profile->nik ?? ''}}">
             </div>
+          </div>,
+          <div class="mb-3">
+            <label for="gender" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+            <input type="radio" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
+            <label for="gender">Laki-Laki</label>
+            <input type="radio" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
+            <label for="gender">Perempuan</label>
           </div>
-          <div class="mb-3 row">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">Perempuan</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">Laki-laki</label>
-          </div>
-          </div>
-
-          <div class="mb-3 form-check">
-            <label for="">Jenis Kelamin</label>
-            <input type="radio" class="form-check-input border-danger" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
-            <label for="gender" class="form-check-label">Laki-Laki</label>
-            <input type="radio" class="form-check-input" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
-            <label for="gender" class="form-check-label">Perempuan</label>
-          </div>
-          <button type="submit" class="btn btn-primary" style="height: 6vh;">Simpan</button>
+          <button style="margin: auto" type="submit" class="btn btn-primary text-center" style="height: 6vh;">Simpan</button>
     </form>
 </div>
 @endsection
