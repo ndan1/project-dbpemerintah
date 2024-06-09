@@ -5,25 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PanjangSim extends Model
+class JadwalKedatanganPerpanjangan extends Model
 {
     use HasFactory;
-    protected $table = 'perpanjang_sim';
-    protected $primaryKey ='id_perpanjang';
+    protected $table = 'jadwalkedatangan_perpanjang';
+    protected $primaryKey ='kedatanganperpanjang_id';
     public $incrementing = true;
     protected $fillable = [
         'id_customer',
-        'foto_ktp',
-        'pas_foto',
-        'surat_sehat',
-        'foto_sim',
-        'tipe_sim',
+        'id_perpanjang',
+        'schedule_date',
+        'schedule_time',
         'status',
-        'comments'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'id_customer');
+    }
+
+    public function perpanjanganSim()
+    {
+        return $this->belongsTo(PanjangSim::class, 'perpanjangan_sim_id');
     }
 }

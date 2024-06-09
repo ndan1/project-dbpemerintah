@@ -23,14 +23,17 @@ class PembuatanSim extends Controller
         Log::debug('Latest Request: ', [$latestRequest]);
     Log::debug('Biodata (tgl_lahir): ', [$biodata]);
         if ($latestRequest) {
-            switch ($latestRequest->status) {
-                case 'approved':
-                    return view('waitquiz');
-                case 'rejected':
-                    $rejectComment = $latestRequest->comments;
-                    return view('pembuatansim', compact('profile', 'rejectComment'));
-                default:
-                    return view('menunggu_respon_admin');
+            if ($latestRequest->status == 'approved' && $latestRequest->test_score >= 70) {
+                return redirect('pembuatan-sim/pembayaran');
+            }
+            elseif ($latestRequest->status == 'approved') {
+                return view('waitquiz');
+            } elseif ($latestRequest->status == 'rejected') {
+                $rejectComment = $latestRequest->comments;
+                return view('pembuatansim', compact('profile', 'rejectComment'));
+            } else {
+                // return view('pembuatansim', compact('profile'));
+                return view('menunggu_respon_admin');
             }
         } else {
             if ($biodata==NULL) {

@@ -46,7 +46,7 @@
     </head>
 <body>
       <main>
-        <div class="sidebar">
+        {{-- <div class="sticky"> --}}
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
@@ -66,8 +66,8 @@
               Pembuatan SIM
             </a>
           </li>
-          <li>
-            <a href="#" class="nav-link">
+          <li class="{{ (Request::is('admin/perpanjang-sim')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/perpanjang-sim') }}" class="nav-link link-sidebar {{ (Request::is('admin/perpanjang-sim')) ? 'active' : '' }}">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
               Perpanjangan SIM
             </a>
@@ -78,16 +78,29 @@
               Ujian Teori
             </a>
           </li>
-          <li>
-            <a href="#" class="nav-link">
+          <li class="{{ (Request::is('admin/pembayaran-pembuatan')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/pembayaran-pembuatan') }}" class="nav-link link-sidebar {{ (Request::is('admin/pembayaran-pembuatan')) ? 'active' : '' }}">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-              Berita
+              Pembayaran Pembuatan SIM
+            </a>
+          </li>
+          <li class="{{ (Request::is('admin/pembayaran-perpanjangan')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/pembayaran-perpanjangan') }}" class="nav-link link-sidebar {{ (Request::is('admin/pembayaran-perpanjangan')) ? 'active' : '' }}">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+              Pembayaran Perpanjangan SIM
+            </a>
+          </li>
+          <li class="{{ (Request::is('admin/jadwal-kedatangan-pembuatan')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/jadwal-kedatangan-pembuatan') }}" class="nav-link link-sidebar {{ (Request::is('admin/jadwal-kedatangan-pembuatan')) ? 'active' : '' }}">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+              Jadwal Kedatangan Pembuatan SIM
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link">
+          <li class="{{ (Request::is('admin/jadwal-kedatangan-perpanjangan')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/jadwal-kedatangan-perpanjangan') }}" class="nav-link link-sidebar {{ (Request::is('admin/jadwal-kedatangan-perpanjangan')) ? 'active' : '' }}">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-              Jadwal Kedatangan
+              Jadwal Kedatangan Perpanjangan SIM
             </a>
           </li>
           <li>
@@ -122,7 +135,7 @@
         </div>
 
       </div>
-    </div>
+    {{-- </div> --}}
       @yield('content')
     </main>
 </body>

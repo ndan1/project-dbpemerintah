@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminListJadwalPembuatan;
+use App\Http\Controllers\AdminListJadwalPerpanjangan;
 use App\Http\Controllers\AdminListPembuatanSim;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginRegisterController;
@@ -8,6 +10,13 @@ use App\Http\Controllers\PerpanjangSim;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizClientController;
+use App\Http\Controllers\AdminListPembayaranPembuatan;
+use App\Http\Controllers\AdminListPembayaranPerpanjangan;
+use App\Http\Controllers\AdminListPerpanjanganSim;
+use App\Http\Controllers\JadwalKedatanganPembuatanController;
+use App\Http\Controllers\JadwalKedatanganPerpanjanganController;
+use App\Http\Controllers\PembayaranPembuatanController;
+use App\Http\Controllers\PembayaranPerpanjangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +63,6 @@ Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout'
 Route::get('/adminpanel', function () {
     return view('admin/adminhome');
 })->name('adminhome');
-// Route::get('/adminpanel', function () {
-//     return view('admin/adminhome');
-// })->middleware('pegawai')->name('adminhome');
 
 Route::get('/adminregister', function () {
     return view('admin/adminregister');
@@ -84,10 +90,41 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-pertanyaan/{id}', [QuizController::class, 'EditQuizForm'])->name('edit.quiz');
     Route::post('edit-pertanyaan/{id}', [QuizController::class, 'EditQuiz'])->name('edit.quiz');
     Route::get('hapus-pertanyaan/{id}', [QuizController::class, 'DeleteQuiz'])->name('delete.quiz');
+
     Route::get('pembuatan-sim', [AdminListPembuatanSim::class, 'adminIndex'])->name('adminpembuatan');
     Route::get('pembuatan-sim/{id}', [AdminListPembuatanSim::class, 'adminShow'])->name('admin.pembuatan-sim.show');
     Route::post('pembuatan-sim/{id}/approve', [AdminListPembuatanSim::class, 'approve'])->name('admin.pembuatan-sim.approve');
     Route::post('pembuatan-sim/{id}/reject', [AdminListPembuatanSim::class, 'reject'])->name('admin.pembuatan-sim.reject');
+
+    Route::get('perpanjang-sim', [AdminListPerpanjanganSim::class, 'adminIndex'])->name('adminperpanjang');
+    Route::get('perpanjang-sim/{id}', [AdminListPerpanjanganSim::class, 'adminShow'])->name('admin.perpanjang-sim.show');
+    Route::post('perpanjang-sim/{id}/approve', [AdminListPerpanjanganSim::class, 'approve'])->name('admin.perpanjang-sim.approve');
+    Route::post('perpanjang-sim/{id}/reject', [AdminListPerpanjanganSim::class, 'reject'])->name('admin.perpanjang-sim.reject');
+
+    Route::get('/pembayaran-pembuatan', [AdminListPembayaranPembuatan::class, 'index'])->name('admin.pembayaran.index');
+    Route::get('/pembayaran-pembuatan/{id}', [AdminListPembayaranPembuatan::class, 'show'])->name('admin.pembayaran.show');
+    Route::post('/pembayaran-pembuatan/{id}/approve', [AdminListPembayaranPembuatan::class, 'approvePayment'])->name('admin.pembayaran.approve');
+    Route::post('/pembayaran-pembuatan/{id}/reject', [AdminListPembayaranPembuatan::class, 'rejectPayment'])->name('admin.pembayaran.reject');
+
+    Route::get('/jadwal-kedatangan-pembuatan', [AdminListJadwalPembuatan::class, 'index'])->name('admin.jadwal-kedatangan.index');
+    Route::get('/jadwal-kedatangan-pembuatan/{id}', [AdminListJadwalPembuatan::class, 'show'])->name('admin.jadwal-kedatangan.show');
+    Route::post('/jadwal-kedatangan-pembuatan-approve/{id}', [AdminListJadwalPembuatan::class, 'approveSchedule'])->name('jadwal-kedatangan.approve');
+    Route::post('/jadwal-kedatangan-pembuatan-reject/{id}', [AdminListJadwalPembuatan::class, 'rejectSchedule'])->name('jadwal-kedatangan.reject');
+    Route::post('/jadwal-kedatangan-pembuatan-fail/{id}', [AdminListJadwalPembuatan::class, 'failSchedule'])->name('jadwal-kedatangan.fail');
+    Route::post('/jadwal-kedatangan-pembuatan-pass/{id}', [AdminListJadwalPembuatan::class, 'passSchedule'])->name('jadwal-kedatangan.pass');
+    Route::patch('/admin/jadwal/{id}/updateStatus', [AdminListJadwalPembuatan::class, 'updateStatus'])->name('admin.jadwal.updateStatus');
+
+    Route::get('/pembayaran-perpanjangan', [AdminListPembayaranPerpanjangan::class, 'index'])->name('admin.pembayaranperpanjangan.index');
+    Route::get('/pembayaran-perpanjangan/{id}', [AdminListPembayaranPerpanjangan::class, 'show'])->name('admin.pembayaranperpanjangan.show');
+    Route::post('/pembayaran-perpanjangan/{id}/approve', [AdminListPembayaranPerpanjangan::class, 'approvePayment'])->name('admin.pembayaranperpanjangan.approve');
+    Route::post('/pembayaran-perpanjangan/{id}/reject', [AdminListPembayaranPerpanjangan::class, 'rejectPayment'])->name('admin.pembayaranperpanjangan.reject');
+
+    Route::get('/jadwal-kedatangan-perpanjangan', [AdminListJadwalPerpanjangan::class, 'index'])->name('admin.jadwal-kedatangan-perpanjangan.index');
+    Route::get('/jadwal-kedatangan-perpanjangan/{id}', [AdminListJadwalPerpanjangan::class, 'show'])->name('admin.jadwal-kedatangan-perpanjangan.show');
+    Route::post('/jadwal-kedatangan-perpanjangan-approve/{id}', [AdminListJadwalPerpanjangan::class, 'approveSchedule'])->name('jadwal-kedatangan-perpanjangan.approve');
+    Route::post('/jadwal-kedatangan-perpanjangan-reject/{id}', [AdminListJadwalPerpanjangan::class, 'rejectSchedule'])->name('jadwal-kedatangan-perpanjangan.reject');
+    Route::post('/jadwal-kedatangan-perpanjangan-fail/{id}', [AdminListJadwalPerpanjangan::class, 'failSchedule'])->name('jadwal-kedatangan-perpanjangan.fail');
+    Route::post('/jadwal-kedatangan-perpanjangan-pass/{id}', [AdminListJadwalPerpanjangan::class, 'passSchedule'])->name('jadwal-kedatangan-perpanjangan.pass');
 });
 
 // Route::get('/ujian-teori', function () {
@@ -98,3 +135,16 @@ Route::post('pembuatan-sim/ujian-teori', [QuizClientController::class, 'SubmitQu
 Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
 Route::post('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
 // Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore']); // Optional, jika diperlukan akses langsung
+
+
+Route::get('pembuatan-sim/pembayaran', [PembayaranPembuatanController::class, 'showPaymentForm'])->name('pembayaran.form');
+Route::post('pembuatan-sim/pembayaran-submit', [PembayaranPembuatanController::class, 'submitPayment'])->name('pembayaran.submit');
+
+Route::get('pembuatan-sim/jadwal-kedatangan', [JadwalKedatanganPembuatanController::class, 'showScheduleForm'])->name('jadwal-kedatangan.form');
+Route::post('pembuatan-sim/jadwal-kedatangan-submit', [JadwalKedatanganPembuatanController::class, 'submitSchedule'])->name('jadwal-kedatangan.submit');
+
+Route::get('perpanjang-sim/pembayaran', [PembayaranPerpanjangController::class, 'showPaymentForm'])->name('pembayaran-perpanjang.form');
+Route::post('perpanjang-sim/pembayaran-submit', [PembayaranPerpanjangController::class, 'submitPayment'])->name('pembayaran-perpanjang.submit');
+
+Route::get('perpanjang-sim/jadwal-kedatangan', [JadwalKedatanganPerpanjanganController::class, 'showScheduleForm'])->name('jadwal-kedatangan-perpanjang.form');
+Route::post('perpanjang-sim/jadwal-kedatangan-submit', [JadwalKedatanganPerpanjanganController::class, 'submitSchedule'])->name('jadwal-kedatangan-perpanjang.submit');
