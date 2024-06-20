@@ -154,6 +154,7 @@ Route::post('pembuatan-sim/pembayaran-submit', [PembayaranPembuatanController::c
 
 Route::get('pembuatan-sim/jadwal-kedatangan', [JadwalKedatanganPembuatanController::class, 'showScheduleForm'])->name('jadwal-kedatangan.form');
 Route::post('pembuatan-sim/jadwal-kedatangan-submit', [JadwalKedatanganPembuatanController::class, 'submitSchedule'])->name('jadwal-kedatangan.submit');
+Route::get('api/get-scheduled-times', [JadwalKedatanganPembuatanController::class, 'getScheduledTimes']);
 
 Route::get('perpanjang-sim/pembayaran', [PembayaranPerpanjangController::class, 'showPaymentForm'])->name('pembayaran-perpanjang.form');
 Route::post('perpanjang-sim/pembayaran-submit', [PembayaranPerpanjangController::class, 'submitPayment'])->name('pembayaran-perpanjang.submit');

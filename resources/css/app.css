@@ -30,7 +30,7 @@ html, body {
 }
 
 .home-jumbotron {
-    background-image: url('../../public/images/wallpaper_bromo.jpg');
+    background-image: url('../../public/images/malang-1.jpeg');
     background-size: cover;
     height: 100vh; /* Menggunakan tinggi viewport untuk menutupi seluruh layar */
     width: 100%;

@@ -19,7 +19,7 @@ class JadwalKedatanganPerpanjanganController extends Controller
         if ($latestRequest) {
             if ($latestRequest->status == 'passed') {
                 // return view('jadwal_form', compact('user', 'jadwalKedatangan'));
-                return view('menunggu_respon_admin');
+                return view('perpanjangsim')->with('profile', $user);
             } elseif ($latestRequest->status == 'failed') {
                 // $rejectComment = $latestRequest->comments;
                 return view('jadwal_form_perpanjangan', compact('user', 'jadwalKedatangan', 'perpanjangSim'));

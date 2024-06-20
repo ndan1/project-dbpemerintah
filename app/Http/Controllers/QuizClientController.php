@@ -131,7 +131,7 @@ class QuizClientController extends Controller
     if ($percentageScore >= 70) {
         session()->flash('success', 'Selamat! Anda lulus ujian dengan skor yang memuaskan.');
     } else {
-        session()->flash('fail', 'Maaf, Anda belum lulus ujian. Silakan coba lagi.');
+        session()->flash('fail', 'Maaf, Anda belum lulus ujian. Silakan coba lagi dalam 24 jam.');
     }
 
     return view('quizresult', compact('score', 'totalQuestions', 'percentageScore'));
