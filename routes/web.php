@@ -134,10 +134,15 @@ Route::prefix('admin')->group(function () {
         return view('admin.tambahberita');
         })->name('createBerita');
 
-        Route::get('edit-berita/{id}', [BeritaController::class, 'EditBeritaForm'])->name('edit.berita');
-        Route::post('edit-berita/{id}', [BeritaController::class, 'EditBerita'])->name('edit.berita');
-        Route::get('hapus-berita/{id}', [BeritaController::class, 'DeleteBerita'])->name('delete.berita');
-});
+        // Route::get('edit-berita/{id}', [BeritaController::class, 'EditBeritaForm'])->name('edit.berita');
+        // Route::post('edit-berita/{id}', [BeritaController::class, 'EditBerita'])->name('edit.berita');
+        // Route::get('hapus-berita/{id}', [BeritaController::class, 'DeleteBerita'])->name('delete.berita');
+
+        Route::get('admin/edit-berita/{id}', [BeritaController::class, 'EditBeritaForm'])->name('edit.berita');
+        Route::post('admin/edit-berita/{id}', [BeritaController::class, 'EditBerita'])->name('edit.berita');
+        Route::get('admin/hapus-berita/{id}', [BeritaController::class, 'DeleteBerita'])->name('delete.berita');
+
+    });
 
 // Route::get('/ujian-teori', function () {
     //     return view('quiz');

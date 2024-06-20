@@ -103,11 +103,11 @@
               Jadwal Kedatangan Perpanjangan SIM
             </a>
           </li>
-          <li>
-            <a href="{{ (Request::is('admin/berita')) ? 'nav-item' : '' }}" class="nav-link">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-              Berita
-            </a>
+          <li class="{{ (Request::is('admin/berita')) ? 'nav-item' : '' }}">
+            <a href="{{ url('admin/berita') }}" class="nav-link link-sidebar {{ (Request::is('admin/berita')) ? 'active' : '' }}">
+                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                Berita
+              </a>
           </li>
         </ul>
         <hr>
