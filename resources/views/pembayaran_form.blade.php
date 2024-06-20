@@ -25,7 +25,8 @@
     <form action="{{ route('pembayaran.submit') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="pembuatan_sim_id" value="{{ $pembuatanSim->id_pembuatan }}">
-        <input type="hidden" name="amount" value="{{ $amount }}">
+        <input type="text" name="amount" value="{{ $amount }}" readonly>
+        <h4 class="mt-4 mb-4">Transfer ke BCA 4821412234 a/n Samsat Kota Malang </h4>
         <div class="mb-3">
             <label for="payment_proof" class="form-label">Bukti Pembayaran:</label>
             <input type="file" class="form-control" id="payment_proof" name="payment_proof" required>
