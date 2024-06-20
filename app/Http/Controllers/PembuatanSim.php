@@ -32,7 +32,6 @@ class PembuatanSim extends Controller
                 $rejectComment = $latestRequest->comments;
                 return view('pembuatansim', compact('profile', 'rejectComment'));
             } else {
-                // return view('pembuatansim', compact('profile'));
                 return view('menunggu_respon_admin');
             }
         } else {

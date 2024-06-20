@@ -18,7 +18,7 @@ class JadwalKedatanganPembuatanController extends Controller
         if ($latestRequest) {
             if ($latestRequest->status == 'passed') {
                 // return view('jadwal_form', compact('user', 'jadwalKedatangan'));
-                return view('menunggu_respon_admin');
+                return view('pembuatansim')->with('profile', $user);
             } elseif ($latestRequest->status == 'failed') {
                 // $rejectComment = $latestRequest->comments;
                 return view('jadwal_form', compact('user', 'jadwalKedatangan', 'pembuatanSim'));
@@ -57,6 +57,26 @@ class JadwalKedatanganPembuatanController extends Controller
 
         return redirect()->route('home')->with('success', 'Jadwal berhasil disubmit.');
     }
+
+//     public function getScheduledTimes(Request $request)
+// {
+//     $request->validate([
+//         'date' => 'required|date',
+//     ]);
+
+//     try {
+//         $scheduledTimes = JadwalKedatangan::where('schedule_date', $request->date)
+//                                           ->pluck('schedule_time')
+//                                           ->toArray();
+
+//         return response()->json(['disabledTimes' => $scheduledTimes]);
+//     } catch (\Exception $e) {
+//         return response()->json(['error' => 'Failed to fetch scheduled times.'], 500);
+//     }
+// }
+
+
+
 
 }
 

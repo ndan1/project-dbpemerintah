@@ -65,7 +65,6 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('profile', ['customer_email' => Auth::user()->customer_email]) }}" style="color: black">Lengkapi Data</a></li>
-                                        <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
                                         <li><a class="dropdown-item" href="{{ route('logout') }}" style="color: black">Logout</a></li>
                                     </ul>
                                 </li>

@@ -76,7 +76,7 @@
             <div class="col-sm-10">
               <input type="text" class="form-control border-danger" id="inputPassword" name="nik" value="{{$profile->nik ?? ''}}">
             </div>
-          </div>,
+          </div>
           <div class="mb-3">
             <label for="gender" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <input type="radio" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
@@ -95,14 +95,6 @@
                 </select>
             </div>
         </div>
-          <div class="mb-3">
-            <label for="gender" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-            <input type="radio" id="gender" value="L" name="gender" {{ ($profile->gender=="L")? "checked" : "" }}>
-            <label for="gender">Laki-Laki</label>
-            <input type="radio" id="gender" value="P" style="margin-left: 2vw;"  name="gender" {{ ($profile->gender=="P")? "checked" : "" }}>
-            <label for="gender">Perempuan</label>
-          </div>
-
           <div class="mb-3 row">
             <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
             <div class="col-sm-10">
@@ -123,9 +115,45 @@
           <div class="mb-4 row">
             <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control border-danger" id="provinsi" name="provinsi" value="{{$profile->provinsi ?? ''}}">
+                <select class="form-control border-danger" id="provinsi" name="provinsi">
+                    <option value="">Pilih Provinsi</option>
+                    <option value="Aceh" {{ ($profile->provinsi ?? '') == 'Aceh' ? 'selected' : '' }}>Aceh</option>
+                    <option value="Bali" {{ ($profile->provinsi ?? '') == 'Bali' ? 'selected' : '' }}>Bali</option>
+                    <option value="Banten" {{ ($profile->provinsi ?? '') == 'Banten' ? 'selected' : '' }}>Banten</option>
+                    <option value="Bengkulu" {{ ($profile->provinsi ?? '') == 'Bengkulu' ? 'selected' : '' }}>Bengkulu</option>
+                    <option value="DI Yogyakarta" {{ ($profile->provinsi ?? '') == 'DI Yogyakarta' ? 'selected' : '' }}>DI Yogyakarta</option>
+                    <option value="DKI Jakarta" {{ ($profile->provinsi ?? '') == 'DKI Jakarta' ? 'selected' : '' }}>DKI Jakarta</option>
+                    <option value="Gorontalo" {{ ($profile->provinsi ?? '') == 'Gorontalo' ? 'selected' : '' }}>Gorontalo</option>
+                    <option value="Jambi" {{ ($profile->provinsi ?? '') == 'Jambi' ? 'selected' : '' }}>Jambi</option>
+                    <option value="Jawa Barat" {{ ($profile->provinsi ?? '') == 'Jawa Barat' ? 'selected' : '' }}>Jawa Barat</option>
+                    <option value="Jawa Tengah" {{ ($profile->provinsi ?? '') == 'Jawa Tengah' ? 'selected' : '' }}>Jawa Tengah</option>
+                    <option value="Jawa Timur" {{ ($profile->provinsi ?? '') == 'Jawa Timur' ? 'selected' : '' }}>Jawa Timur</option>
+                    <option value="Kalimantan Barat" {{ ($profile->provinsi ?? '') == 'Kalimantan Barat' ? 'selected' : '' }}>Kalimantan Barat</option>
+                    <option value="Kalimantan Selatan" {{ ($profile->provinsi ?? '') == 'Kalimantan Selatan' ? 'selected' : '' }}>Kalimantan Selatan</option>
+                    <option value="Kalimantan Tengah" {{ ($profile->provinsi ?? '') == 'Kalimantan Tengah' ? 'selected' : '' }}>Kalimantan Tengah</option>
+                    <option value="Kalimantan Timur" {{ ($profile->provinsi ?? '') == 'Kalimantan Timur' ? 'selected' : '' }}>Kalimantan Timur</option>
+                    <option value="Kalimantan Utara" {{ ($profile->provinsi ?? '') == 'Kalimantan Utara' ? 'selected' : '' }}>Kalimantan Utara</option>
+                    <option value="Kepulauan Bangka Belitung" {{ ($profile->provinsi ?? '') == 'Kepulauan Bangka Belitung' ? 'selected' : '' }}>Kepulauan Bangka Belitung</option>
+                    <option value="Kepulauan Riau" {{ ($profile->provinsi ?? '') == 'Kepulauan Riau' ? 'selected' : '' }}>Kepulauan Riau</option>
+                    <option value="Lampung" {{ ($profile->provinsi ?? '') == 'Lampung' ? 'selected' : '' }}>Lampung</option>
+                    <option value="Maluku" {{ ($profile->provinsi ?? '') == 'Maluku' ? 'selected' : '' }}>Maluku</option>
+                    <option value="Maluku Utara" {{ ($profile->provinsi ?? '') == 'Maluku Utara' ? 'selected' : '' }}>Maluku Utara</option>
+                    <option value="Nusa Tenggara Barat" {{ ($profile->provinsi ?? '') == 'Nusa Tenggara Barat' ? 'selected' : '' }}>Nusa Tenggara Barat</option>
+                    <option value="Nusa Tenggara Timur" {{ ($profile->provinsi ?? '') == 'Nusa Tenggara Timur' ? 'selected' : '' }}>Nusa Tenggara Timur</option>
+                    <option value="Papua" {{ ($profile->provinsi ?? '') == 'Papua' ? 'selected' : '' }}>Papua</option>
+                    <option value="Papua Barat" {{ ($profile->provinsi ?? '') == 'Papua Barat' ? 'selected' : '' }}>Papua Barat</option>
+                    <option value="Riau" {{ ($profile->provinsi ?? '') == 'Riau' ? 'selected' : '' }}>Riau</option>
+                    <option value="Sulawesi Barat" {{ ($profile->provinsi ?? '') == 'Sulawesi Barat' ? 'selected' : '' }}>Sulawesi Barat</option>
+                    <option value="Sulawesi Selatan" {{ ($profile->provinsi ?? '') == 'Sulawesi Selatan' ? 'selected' : '' }}>Sulawesi Selatan</option>
+                    <option value="Sulawesi Tengah" {{ ($profile->provinsi ?? '') == 'Sulawesi Tengah' ? 'selected' : '' }}>Sulawesi Tengah</option>
+                    <option value="Sulawesi Tenggara" {{ ($profile->provinsi ?? '') == 'Sulawesi Tenggara' ? 'selected' : '' }}>Sulawesi Tenggara</option>
+                    <option value="Sulawesi Utara" {{ ($profile->provinsi ?? '') == 'Sulawesi Utara' ? 'selected' : '' }}>Sulawesi Utara</option>
+                    <option value="Sumatera Barat" {{ ($profile->provinsi ?? '') == 'Sumatera Barat' ? 'selected' : '' }}>Sumatera Barat</option>
+                    <option value="Sumatera Selatan" {{ ($profile->provinsi ?? '') == 'Sumatera Selatan' ? 'selected' : '' }}>Sumatera Selatan</option>
+                    <option value="Sumatera Utara" {{ ($profile->provinsi ?? '') == 'Sumatera Utara' ? 'selected' : '' }}>Sumatera Utara</option>
+                </select>
             </div>
-          </div>
+        </div>
           <div class="text-center">
               <button style="margin: auto" type="submit" class="btn btn-primary text-center" style="height: 6vh;">Simpan</button>
             </div>

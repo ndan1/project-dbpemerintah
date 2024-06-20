@@ -32,7 +32,7 @@ class PerpanjangSim extends Controller
             }
         } else {
             // return view('perpanjangsim', compact('profile'));
-            $biodata = User::where('customer_id', $profile->id_customer)->value('tgl_lahir');
+            $biodata = User::where('customer_id', $profile->customer_id)->value('tgl_lahir');
             if ($biodata == NULL) {
                 return redirect()->route('profile', ['customer_email' => $profile->customer_email])->with('message', 'Lengkapi profile terlebih dahulu untuk mendaftarkan SIM!');
             } else {
