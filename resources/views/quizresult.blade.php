@@ -22,6 +22,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger"><a href="{{ url('home') }}" class="text-white">Kembali</a></button>
+                    @if ($score >= 7)
+                        <button type="button" class="btn btn-success">
+                            <a href="{{ route('pembayaran.form', ['type' => 'pembuatan']) }}" class="text-white">Pembayaran</a>
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>

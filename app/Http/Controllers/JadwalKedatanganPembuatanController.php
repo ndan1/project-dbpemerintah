@@ -49,13 +49,13 @@ class JadwalKedatanganPembuatanController extends Controller
             'id_customer' => $user->customer_id,
         ], [
             'id_pembuatan' => $request->pembuatan_sim_id,
-            'id_perpanjang' => $request->perpanjang_sim_id,
             'schedule_date' => $request->schedule_date,
             'schedule_time' => $request->schedule_time,
             'status' => 'pending',
         ]);
 
-        return redirect()->route('home')->with('success', 'Jadwal berhasil disubmit.');
+        // return redirect()->route('home')->with('success', 'Jadwal berhasil disubmit.');
+        return view('info_jadwal_kedatangan', compact('user', 'jadwalKedatangan'));
     }
 
 }

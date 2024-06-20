@@ -8,11 +8,13 @@ use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PembuatanSim;
 use App\Http\Controllers\PerpanjangSim;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizClientController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\AdminListPembayaranPembuatan;
 use App\Http\Controllers\AdminListPembayaranPerpanjangan;
 use App\Http\Controllers\AdminListPerpanjanganSim;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\JadwalKedatanganPembuatanController;
 use App\Http\Controllers\JadwalKedatanganPerpanjanganController;
 use App\Http\Controllers\PembayaranPembuatanController;
@@ -60,9 +62,10 @@ Route::post('/perpanjang-sim',[PerpanjangSim::class, 'store'])->name('panjang-si
 Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
 
-Route::get('/adminpanel', function () {
-    return view('admin/adminhome');
-})->name('adminhome');
+Route::get('/adminpanel',[AdminDashboardController::class, 'hitungPembuatanSIM'])->name('adminhome');
+// Route::get('/adminpanel', function () {
+//     return view('admin/adminhome');
+// })->name('adminhome');
 
 Route::get('/adminregister', function () {
     return view('admin/adminregister');
@@ -125,11 +128,20 @@ Route::prefix('admin')->group(function () {
     Route::post('/jadwal-kedatangan-perpanjangan-reject/{id}', [AdminListJadwalPerpanjangan::class, 'rejectSchedule'])->name('jadwal-kedatangan-perpanjangan.reject');
     Route::post('/jadwal-kedatangan-perpanjangan-fail/{id}', [AdminListJadwalPerpanjangan::class, 'failSchedule'])->name('jadwal-kedatangan-perpanjangan.fail');
     Route::post('/jadwal-kedatangan-perpanjangan-pass/{id}', [AdminListJadwalPerpanjangan::class, 'passSchedule'])->name('jadwal-kedatangan-perpanjangan.pass');
+    Route::get('berita', [BeritaController::class, 'ShowBeritaAdmin'])->name('show.berita');
+    Route::post('tambah-berita', [BeritaController::class, 'BuatBerita'])->name('buat.berita');
+    Route::get('tambah-berita', function () {
+        return view('admin.tambahberita');
+        })->name('createBerita');
+
+        Route::get('edit-berita/{id}', [BeritaController::class, 'EditBeritaForm'])->name('edit.berita');
+        Route::post('edit-berita/{id}', [BeritaController::class, 'EditBerita'])->name('edit.berita');
+        Route::get('hapus-berita/{id}', [BeritaController::class, 'DeleteBerita'])->name('delete.berita');
 });
 
 // Route::get('/ujian-teori', function () {
-//     return view('quiz');
-// })->name('quiz');
+    //     return view('quiz');
+    // })->name('quiz');
 Route::get('pembuatan-sim/ujian-teori', [QuizClientController::class, 'ShowQuizClient'])->name('show.quiz.client');
 Route::post('pembuatan-sim/ujian-teori', [QuizClientController::class, 'SubmitQuiz'])->name('submit.quiz');
 Route::get('pembuatan-sim/hasil-ujian-teori', [QuizClientController::class, 'calculateScore'])->name('result.show');
@@ -148,3 +160,6 @@ Route::post('perpanjang-sim/pembayaran-submit', [PembayaranPerpanjangController:
 
 Route::get('perpanjang-sim/jadwal-kedatangan', [JadwalKedatanganPerpanjanganController::class, 'showScheduleForm'])->name('jadwal-kedatangan-perpanjang.form');
 Route::post('perpanjang-sim/jadwal-kedatangan-submit', [JadwalKedatanganPerpanjanganController::class, 'submitSchedule'])->name('jadwal-kedatangan-perpanjang.submit');
+
+Route::get('berita', [BeritaController::class, 'ShowBeritaMasyarakat'])->name('show.berita.masyarakat');
+Route::get('berita/{id}', [BeritaController::class, 'ShowBeritaDetail'])->name('show.berita.detail');

@@ -15,7 +15,6 @@ class JadwalKedatangan extends Model
     protected $fillable = [
         'id_customer',
         'id_pembuatan',
-        'id_perpanjang',
         'schedule_date',
         'schedule_time',
         'status',

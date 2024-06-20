@@ -104,9 +104,9 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-              User Lists
+            <a href="{{ (Request::is('admin/berita')) ? 'nav-item' : '' }}" class="nav-link">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+              Berita
             </a>
           </li>
         </ul>

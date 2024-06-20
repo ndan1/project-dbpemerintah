@@ -18,6 +18,11 @@
         body {
             font-family: "Josefin Sans", sans-serif;
         }
+
+        .langkah img {
+            width: 300px;
+            height: 300px;
+        }
     </style>
 </head>
 
@@ -54,7 +59,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item mx-4">
-                                <a class="nav-link" href="#" {{ request()->is('berita') ? 'active' : '' }}>Berita</a>
+                                <a class="nav-link" href="{{url('berita')}}" {{ request()->is('berita') ? 'active' : '' }}>Berita</a>
                             </li>
                             @auth
                                 <li class="nav-item mx-5 dropdown" style="list-style-type: none;">

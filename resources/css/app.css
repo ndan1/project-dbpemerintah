@@ -154,3 +154,15 @@ html, body {
         padding-right: 1.5vh;
     }
 }
+
+.container-count-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.container-count-antrian {
+    padding: 20px 50px;
+    border: 5px solid black;
+}
