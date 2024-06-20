@@ -26,11 +26,7 @@
                         <button type="button" class="btn btn-success">
                             <a href="{{ route('pembayaran.form', ['type' => 'pembuatan']) }}" class="text-white">Pembayaran</a>
                         </button>
-<<<<<<< HEAD
                     @endif
-=======
-                    @endif
->>>>>>> 71fe82f9ac92976ef06c90359c513193a0ef4ee1
                 </div>
             </div>
         </div>

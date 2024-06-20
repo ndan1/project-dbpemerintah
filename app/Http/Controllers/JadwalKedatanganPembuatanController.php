@@ -45,7 +45,7 @@ class JadwalKedatanganPembuatanController extends Controller
             return back()->withErrors(['Jadwal sudah terisi, silakan pilih waktu lain.']);
         }
 
-        JadwalKedatangan::updateOrCreate([
+        $jadwalKedatangan = JadwalKedatangan::updateOrCreate([
             'id_customer' => $user->customer_id,
         ], [
             'id_pembuatan' => $request->pembuatan_sim_id,
